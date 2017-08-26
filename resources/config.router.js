@@ -20,29 +20,40 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         modules: jsRequires.modules
     });
 
-	$urlRouterProvider.otherwise('/dashboard');
+	$urlRouterProvider.otherwise('/login');
 
     $stateProvider
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('dashboard', {
+        .state('login', {
+            url: '/login',
+            templateUrl: 'usuarios/UsuariosCtrl'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'usuarios/UsuariosCtrl/register'
+        })        
+        .state('app', {
+            url: '/app',
+            template: '<div ui-view></div>'
+        })        
+        .state('app.dashboard', {
             url: '/dashboard',
             templateUrl: 'dashboard/DashboardCtrl',
             resolve: loadSequence('dashboardCtrl','dashboardService')
-
         })
-        .state('forms', {
+        .state('app.forms', {
             url: '/forms',
             templateUrl: 'forms/formsCtrl'
         })
-        .state('charts', {
+        .state('app.charts', {
             url: '/charts',
             templateUrl: 'charts/chartsCtrl'
         })
-        .state('tables', {
+        .state('app.tables', {
             url: '/tables',
             templateUrl: 'tables/tablesCtrl'
         })
-        .state('consulta', {
+        .state('app.consulta', {
             url: '/consulta',
             templateUrl: 'consulta/consultaCtrl'
         })

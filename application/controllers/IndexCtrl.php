@@ -10,7 +10,7 @@ class IndexCtrl extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->load->view("indexView.html");
+		$this->load->view("welcome");
 	}
 
 }
