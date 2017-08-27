@@ -17,7 +17,10 @@ app.constant('JS_REQUIRES', {
         // 'loginServices': 'angular-app/services/loginServices.js',
         
         'dashboardCtrl': 'resources/js/controllers/dashboard/dashboardCtrl.js',
-        'dashboardService': 'resources/js/services/dashboard/dashboardService.js'
+        'dashboardService': 'resources/js/services/dashboard/dashboardService.js',
+        'consultasCtrl': 'resources/js/controllers/consultas/consultasCtrl.js',
+        'consultasService': 'resources/js/services/consultas/consultasService.js',
+        'pacientesService': 'resources/js/services/pacientes/pacientesService.js'
 
         // 'itemCtrl': 'angular-app/controllers/ItemController.js',
         // 'itemService': 'angular-app/services/myServices.js',        

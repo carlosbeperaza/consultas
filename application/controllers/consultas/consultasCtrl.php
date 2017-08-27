@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ConsultaCtrl extends CI_Controller {
+class ConsultasCtrl extends CI_Controller {
 
     public function __construct() {
 
@@ -14,11 +14,17 @@ class ConsultaCtrl extends CI_Controller {
             die();
         }
         parent::__construct();
-        //Do your magic here		
+        //Do your magic here	
+        $this->load->model("consultas/Consultas_model");
     }
 
     public function index() {
         $this->load->view("consulta/consulta.html");
-    } 
+    }
+
+    public function getTipoConsulta() {
+        $data['data'] = $this->Consultas_model->getTipoConsulta();
+        echo json_encode($data);
+    }
 
 }
