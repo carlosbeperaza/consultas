@@ -55,9 +55,10 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         })
         .state('app.consulta', {
             url: '/consulta',
-            templateUrl: 'consulta/consultaCtrl'
+            templateUrl: 'consultas/consultasCtrl',
+            resolve: loadSequence('consultasCtrl','consultasService', 'pacientesService')
         })
-        // .state('login', {
+        // .state('login', {dashboardService
         //     url: '/login',
         //     templateUrl: 'partials/login.html'
         // })
