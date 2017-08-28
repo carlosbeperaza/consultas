@@ -21,6 +21,10 @@ class ConsultasCtrl extends CI_Controller {
     public function index() {
         $this->load->view("consulta/consulta.html");
     }
+//    vista cargar los archivos de la vista
+    public function reversoView(){
+        $this->load->view("consulta/reverso.html");
+    }
 
     public function getTipoConsulta() {
         $data['data'] = $this->Consultas_model->getTipoConsulta();
