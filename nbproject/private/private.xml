@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Xampp/Xampp/htdocs/consultas/application/controllers/pacientes/pacientesCtrl.php</file>
+            <file>file:/C:/Xampp/Xampp/htdocs/consultas/application/models/pacientes/Pacientes_model.php</file>
+            <file>file:/C:/Xampp/Xampp/htdocs/consultas/resources/js/services/pacientes/pacientesService.js</file>
+            <file>file:/C:/Xampp/Xampp/htdocs/consultas/resources/config.constant.js</file>
+        </group>
     </open-files>
 </project-private>
