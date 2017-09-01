@@ -60,7 +60,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$ocL
                 })
                 .state('app.reverso', {
                     url: '/reverso',
-                    templateUrl: 'consultas/consultasCtrl/reversoView',
+                    templateUrl: 'consultas/reversoCtrl',
                     resolve: loadSequence('reversoCtrl', 'reversoService')
                 })
                 // .state('login', {dashboardService
