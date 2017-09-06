@@ -2,6 +2,11 @@
 app.controller('reversoCtrl', ['$scope', 'reversoService',
     function ($scope, reversoService) {
 
+        $scope.esconderInput = true;
+        $scope.esconderInput2 = true;
+        $scope.esconderInput3 = true;
+        $scope.esconderInput4 = true;
+
         reversoService.getMetodoEntrega().then(function (response) {
 
             $scope.metodoEntrega = response.data;
@@ -23,30 +28,19 @@ app.controller('reversoCtrl', ['$scope', 'reversoService',
 
         });
 
-//        $scope.changeTipoConsulta = function () {
-//           if ($scope.tipoConsulta === "1") {
-//               $scope.disabledNinio = false;
-//              $scope.disabledReproductiva = true;
-//          }
-//           if ($scope.tipoConsulta === "2") {
-//               $scope.disabledReproductiva = false;
-//               $scope.disabledNinio = true;
-//           }
-//           if ($scope.tipoConsulta === "0") {
-//               $scope.disabledNinio = true;
-//                $scope.disabledReproductiva = true;
-//           }
-//            if ($scope.tipoConsulta === "10") {
-//               $scope.disabledNinio = false;
-//              $scope.disabledReproductiva = false;
-//           }
-//        };
-//
-//        $scope.buscarUsuarioByAfiliacion = function () {
-//            pacientesService.buscarUsuarioByAfiliacion($scope.consulta).then(function (response) {
-//                $scope.paciente = response.data;
-//               console.log($scope.paciente);
-//            });
-//        };
 
-    }]);
+        $scope.formInsumos = function (formData) {
+
+            console.log(formData);
+
+            reversoService.insertIsumos(formData).then(function(){
+
+            // console.log(response);
+
+        });          
+
+        }
+
+
+
+ }]);

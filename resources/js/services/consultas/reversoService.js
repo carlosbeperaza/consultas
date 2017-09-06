@@ -16,7 +16,13 @@ app.factory('reversoService', ['$http',
                 return $http.get("consultas/reversoCtrl/getInsumos").then(function (response) {
                     return response.data;
                 });
+            },
+            insertIsumos: function(formData) {
+                return $http.post("consultas/reversoCtrl/insertInsumos", formData ).then(function () {
+                    // return response.data;
+                });
             }
+
         };
     }]);
 

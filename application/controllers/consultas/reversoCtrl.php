@@ -41,4 +41,46 @@ class ReversoCtrl extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function insertInsumos() {
+
+        $request =  json_decode(file_get_contents("php://input"));
+
+
+        if ($request->insumo1 == "" and $request->cantidad1 == "") {
+            
+
+        }else{
+
+            $data = array(
+
+            'nombre' => $request->insumo1,
+            'cantidad' => $request->cantidad1
+
+            );
+
+             $this->Reverso_model->insertInsumos($data);           
+        }
+
+         if ($request->insumo2 == "" and $request->cantidad2 == "") {
+            
+
+        }else{
+
+            $data = array(
+
+            'nombre' => $request->insumo2,
+            'cantidad' => $request->cantidad2
+
+            );
+
+             $this->Reverso_model->insertInsumos($data);           
+        }
+
+  
+
+
+
+        // echo json_encode($data);
+    }
+
 }
