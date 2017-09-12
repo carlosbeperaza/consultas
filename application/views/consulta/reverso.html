@@ -18,447 +18,147 @@
             </header>
             <form>
                 <div class="row">
+
                     <div class="col-lg-12">               
                         <div class="card">
                             <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Consultas y Atenciones de planificación familiar y/o detecciones</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">                                   
-                                    <div class="col-lg-3">
-                                        <div class="form-group" >
-                                            <label>Seleccione Metodos de Entrega</label>                                    
+                              <h2 class="h5 display display">Consultas y Atenciones de planificación familiar y/o detecciones</h2>
+                          </div>
+
+                          <div class="card-block"> 
+                            <div class="row"> 
+                                <div class="col-lg-3">
+                                    <div class="form-group" >
+                                        <label>Seleccione Metodos de Entrega</label>    
+                                        <div ng-repeat="metodos in metodoEntrega">                                
                                             <div class="i-checks">
-                                                <input id="checkboxCustom2" type="checkbox" value="" checked="" class="form-control-custom">
-                                                <label for="checkboxCustom2">{{metodoEntrega[0].nombre}}</label>
+                                                <input id="checkboxCustom{{metodos.id_metodo}}" type="checkbox" class="form-control-custom" ng-model="metodos.selected">
+                                                <label for="checkboxCustom{{metodos.id_metodo}}">{{metodos.nombre}}</label>
                                             </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom3" type="checkbox" value=""  class="form-control-custom">
-                                                <label for="checkboxCustom3">{{metodoEntrega[1].nombre}}</label>
-                                            </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom4" type="checkbox" value=""  class="form-control-custom">
-                                                <label for="checkboxCustom4">{{metodoEntrega[2].nombre}}</label>
-                                            </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom5" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom5">{{metodoEntrega[3].nombre}}</label>
-                                            </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom6" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom6">{{metodoEntrega[4].nombre}}</label>
-                                            </div> 
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom7" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom7">{{metodoEntrega[5].nombre}}</label>
-                                            </div>
-                                        </div>                                                                                                                       
-                                    </div>                            
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <br>                                    
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom8" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom8">{{metodoEntrega[6].nombre}}</label>
-                                            </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom9" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom9">{{metodoEntrega[7].nombre}}</label>
-                                            </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom10" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom10">{{metodoEntrega[8].nombre}}</label>
-                                            </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom11" type="checkbox" value="" class="form-control-custom">                                                    
-                                                <label for="checkboxCustom11">{{metodoEntrega[9].nombre}}</label>
-                                            </div>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom12" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom12">{{metodoEntrega[10].nombre}}</label>
-                                            </div>                                    
-                                        </div>                                                       
-                                    </div>                         
-                                    <div class="col-lg-3">                               
-                                        <div class="form-group">
-                                            <label>Planificacion Familiar</label>
-                                            <div class="i-checks" ng-repeat="plan in planFamiliar">
-                                                <input id="checkboxCustom13" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom13">{{plan.nombre}}</label>
-                                            </div>                                           
-                                        </div>                                
-                                    </div>                             
-                                </div>                        
+                                        </div> 
+                                    </div>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Planificacion Familiar</label>
+                                        <div class="i-checks" ng-repeat="plan in planFamiliar">
+                                            <input id="checkPlan{{plan.id_planificacion_familiar}}" type="checkbox" class="form-control-custom" ng-model="plan.selected">
+                                            <label for="checkPlan{{plan.id_planificacion_familiar}}">{{plan.nombre}}</label>
+                                        </div>                                           
+                                    </div>                                
+                                </div>                             
                             </div>
                         </div>
-                    </div> 
-                    <div class="col-lg-12">               
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Detecciones, SINBA-SIS-DET-P</h2>
-                            </div>  
-                            <div class="card-block"> 
-                                <div class="row">  
-                                    <div class="col-lg-4">
-                                        <div class="form-group">                                   
-                                            <label>Resultado de las Detecciones</label>                                    
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom16" type="checkbox" value="" checked="" class="form-control-custom">
-                                                <label for="checkboxCustom16">DIABETES MELLITUS</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom17" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom17">HIPERTENSIÓN ARTERIAL</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom18" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom18">OBESIDAD</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom19" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom19">DISLIPIDEMIAS</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom20" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom20">DEPRESIÓN</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom21" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom21">ALTERACIÓN DE MEMORIA</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom22" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom22">SINTOMÁTICO RESPIRATORIO</label>
-                                            </div> 
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom23" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom23">INCONTINENCIA URINARIA 60 Y MÁS AÑOS</label>
-                                            </div> 
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom24" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom24">SÍNDROME DE CAÍDAS 60 Y MÁS AÑOS</label>
-                                            </div>
+                    </div>
 
+                </div> 
+
+                <div class="col-lg-12">               
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Detecciones, SINBA-SIS-DET-P</h2>
+                        </div>  
+                        <div class="card-block"> 
+                            <div class="row">  
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Resultado de las Detecciones</label>                                    
+                                        <div class="i-checks">
+                                            <div ng-repeat="datosDetecciones in detecciones">
+                                                <input id="checkboxDetecciones{{datosDetecciones.id_detecciones}}" type="checkbox" class="form-control-custom" ng-model="datosDetecciones.selected">
+                                                <label for="checkboxDetecciones{{datosDetecciones.id_detecciones}}">{{datosDetecciones.nombre_detecciones}}</label>
+                                                <div class="select col-lg-5">
+                                                    <select name="resultado1" class="form-control form-control-sm" ng-model="datosDetecciones.resultado">
+                                                        <option value="" selected disabled hidden>SELECCIONA</option>
+                                                        <option>Positivo</option>
+                                                        <option>Negavito</option>                                            
+                                                    </select>
+                                                </div>  
+                                            </div>
                                         </div>
                                         <br>
-                                        <hr>
-                                        <div class="form-group">
-                                            <label>ADICCIONES</label>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom25" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom25">ALCOHOLISMO</label>
+                                    </div>
+                                </div> 
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>ADICCIONES</label>
+                                        <div class="i-checks">
+                                            <div ng-repeat="datosAdicciones in dataAdicciones">
+                                                <input id="checkAdicciones{{datosAdicciones.id_adicciones}}" type="checkbox" class="form-control-custom" ng-model="datosAdicciones.selected" >
+                                                <label for="checkAdicciones{{datosAdicciones.id_adicciones}}">{{datosAdicciones.nombre_a}}</label>
+
+                                                <div class="select col-lg-5">
+                                                    <select name="resultado" class="form-control form-control-sm" ng-model="datosAdicciones.resultado">
+                                                        <option value="" selected disabled hidden>SELECCIONA</option>
+                                                        <option>Positivo</option>
+                                                        <option>Negavito</option>                                            
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom26" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom26">TABAQUISMO</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom27" type="checkbox" value=""  class="form-control-custom">
-                                                <label for="checkboxCustom27">FÁRMACOS</label>
-                                            </div>
-                                            <br>
                                         </div>
                                     </div> 
-
-                                    <div class="col-lg-2">
-                                        <div class="form-group">   
-                                            <label>Tipo Resultado</label>
+                                </div>
+                                <div class="col-lg-4">                     
+                                    <div class="form-group">
+                                        <label>MUJERES</label>
+                                        <div class="i-checks">
+                                           <div ng-repeat="datosMujeres in dataMujeres">
+                                            <input id="checkMujeres{{datosMujeres.id_mujeres}}" type="checkbox" class="form-control-custom" ng-model="datosMujeres.selected">
+                                            <label for="checkMujeres{{datosMujeres.id_mujeres}}">{{datosMujeres.nombre_m}}</label>
                                             <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
+                                             <select name="resultado" class="form-control form-control-sm" ng-model="datosMujeres.resultado">
+                                                    <option value="" selected disabled hidden>SELECCIONA</option>
                                                     <option>Positivo</option>
                                                     <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultadort" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <br>
-                                            <br>    
-
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
+                                              </select>
+                                            </div>    
                                         </div>
                                     </div>                             
-
-                                    <div class="col-lg-4">
-                                        <div class="form-group">                                   
-                                            <br>                                                                       
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom28" type="checkbox" value="" checked="" class="form-control-custom">
-                                                <label for="checkboxCustom28">RIESGO DE FRACTURAS POR OSTEOPOROSIS 50 Y MÁS</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom29" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom29">VIH</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom30" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom30">GONORREA</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom31" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom31">ITS SECRETORAS</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom32" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom32">ITS ULCERATIVAS</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom33" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom33">ITS ULCERATIVAS</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom34" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom34">ITS TUMORALES</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom35" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom35">SÍFILIS</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom36" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom36">HIPERPLASIA PROSTÁTICA EN HOMBRES DE 45 Y MÁS</label>
-                                            </div>
-
-                                        </div>
-                                        <br>
-                                        <hr>
-                                        <div class="form-group">
-                                            <label>MUJERES</label>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom37" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom37">SOSPECHA DE SÍNDROME DE TURNER</label>
-                                            </div>
-                                            <br>
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom38" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom38">VIOLENCIA FAMILIAR 15 Y MÁS</label>
-                                            </div>                                    
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="form-group">   
-                                            <br>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="rt" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>                                            
-                                            </div> 
-                                            <br>
-                                            <br>
-
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-                                            <div class="select">
-                                                <select name="resultado" class="form-control form-control-sm">
-                                                    <option>Positivo</option>
-                                                    <option>Negavito</option>                                            
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                    </div> 
-
-                                </div> 
+                                </div>
                             </div> 
                         </div> 
-                    </div>    
-                    <div class="col-lg-12">               
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Insumos Utilizados</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">
-                                    <form >
-                                        <div class="i-checks col-lg-3" >
-                                            <input id="boxInsumo1" type="checkbox" name="insumo[]" ng-model="formData.insumo1" class="form-control-custom col-lg-2" ng-true-value="TIRAS EMBARAZADAS SANAS">
-                                            <label for="boxInsumo1">TIRAS EMBARAZADAS SANAS</label>
-                                            <div class="form-group" >
-                                                <label>Cantidad</label>
-                                                <input type="number" placeholder="Cantidad" name="cantidad" ng-model="formData.cantidad1" class="form-control form-control-sm col-lg-4">
-                                            </div>   
-                                        </div>
+                    </div> 
+                </div>    
+            </div> 
 
-                                        <div class="i-checks col-lg-2" >
-                                            <input id="boxInsumo2" type="checkbox" name="insumo[]" ng-model="formData.insumo2" class="form-control-custom col-lg-2" ng-true-value="TIRAS DETECCIÓN">
-                                            <label for="boxInsumo2">TIRAS DETECCIÓN</label>
-                                            <div class="form-group" >
-                                                <label>Cantidad</label>
-                                                <input type="number" placeholder="Cantidad" name="cantidad" ng-model="formData.cantidad2" class="form-control form-control-sm col-lg-6">
-                                            </div>   
-                                        </div>
-
-                                        <div class="i-checks col-lg-3" >
-                                            <input id="boxInsumo3" type="checkbox" name="insumo[]" ng-model="formData.insumo3" class="form-control-custom col-lg-2" ng-true-value="TIRAS CONTROL DE PACIENTES" >
-                                            <label for="boxInsumo3">TIRAS CONTROL DE PACIENTES</label>
-                                            <div class="form-group" >
-                                                <label>Cantidad</label>
-                                                <input type="number" placeholder="Cantidad" name="cantidad" ng-model="formData.cantidad3" class="form-control form-control-sm col-lg-4">
-                                            </div> 
-                                        </div>
-
-                                        <div class="i-checks col-lg-3" >                                            
-                                            <input id="boxInsumo4" type="checkbox" ng-true-value="REACTIVOS DE ANTÍGENO PROSTATICO" name="insumo[]" ng-model="formData.insumo4" class="form-control-custom col-lg-1" />
-                                            <label for="boxInsumo4">REACTIVOS DE ANTÍGENO PROSTATICO</label>
-                                                <div class="form-group" >
-                                                    <label>Cantidad</label>
-                                                    <input type="number" placeholder="Cantidad" name="cantidad" ng-model="formData.cantidad4" class="form-control form-control-sm col-lg-4" >
-                                                </div>   
-                                            </div>
-                                            <div><button ng-click="formInsumos(formData)">Enviar</button></div>
-                                        </div> 
-                                    </form>
-                                </div>                                                         
-                            </div>                        
-                        </div>
+            <div class="col-lg-12">               
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h2 class="h5 display display">Insumos Utilizados</h2>
                     </div>
-                </div> 
-                <div class="line"></div>
-                <div class="col-lg-12">
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <button class="btn btn-secondary">Cancelar</button>
-                            <button class="btn btn-primary">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+                    <div class="card-block"> 
+                        <div class="row">
+                            <div ng-repeat="insumos in dataInsumos">
+                                <div class="i-checks" >
+                                    <input id="boxInsumo{{insumos.id_insumos}}" type="checkbox" name="name" ng-model="insumos.selected" class="form-control-custom col-lg-2">
+                                    <label for="boxInsumo{{insumos.id_insumos}}">{{insumos.nombre}}</label>
+
+                                    <div class="form-group">
+                                      <label>Cantidad</label>
+                                      <input type="number" placeholder="cantidad" name="cantidad" ng-model="insumos.cantidad" class="form-control form-control-sm col-lg-5">
+                                  </div>  
+                              </div>
+                          </div>
+                          <!-- <div><button ng-click="formSupplies(insumos)">SEND</button></div> -->
+                      </div>                                   
+                  </div>                                                         
+              </div>                        
+          </div>
+      </div>
+  </div> 
+  <div class="line"></div>
+  <div class="col-lg-12">
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <button class="btn btn-secondary">Cancelar</button>
+            <button class="btn btn-primary"  ng-click="formReverso(insumos)">Guardar</button>
+        </div>
     </div>
+</div>
+</div>
+</form>
+</div>
 </section>   
 </div>

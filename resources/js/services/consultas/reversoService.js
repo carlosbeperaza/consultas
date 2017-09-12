@@ -12,13 +12,28 @@ app.factory('reversoService', ['$http',
                     return response.data;
                 });
             },
+            getDetecciones: function () {
+                return $http.get("consultas/reversoCtrl/getDetecciones").then(function (response) {
+                    return response.data;
+                });
+            },
             getInsumos: function () {
                 return $http.get("consultas/reversoCtrl/getInsumos").then(function (response) {
                     return response.data;
                 });
             },
-            insertIsumos: function(formData) {
-                return $http.post("consultas/reversoCtrl/insertInsumos", formData ).then(function () {
+            getMujeres: function () {
+                return $http.get("consultas/reversoCtrl/getMujeres").then(function (response) {
+                    return response.data;
+                });
+            },
+            getAdicciones: function () {
+                return $http.get("consultas/reversoCtrl/getAdicciones").then(function (response) {
+                    return response.data;
+                });
+            },
+            insertIsumos: function(dataInsumos) {
+                return $http.post("consultas/reversoCtrl/insertInsumos", dataInsumos ).then(function () {
                     // return response.data;
                 });
             }
