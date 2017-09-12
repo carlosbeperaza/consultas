@@ -18,133 +18,86 @@
             </header>
             <form>
                 <div class="row">
-                    <div class="col-lg-12">               
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header d-flex align-items-center">
                                 <h2 class="h5 display display">Información general</h2>
                             </div>
                             <div class="card-block"> 
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3" ng-repeat="field in fieldsInfoGeneral">
                                         <div class="form-group">
-                                            <label>CLUES</label>
-                                            <input type="text" placeholder="CLUES" class="form-control form-control-sm">
+                                            <label>{{field.title}}</label>
+                                            <input ng-model="consulta[field.model]" type="{{field.type_field}}" placeholder="{{field.title}}" class="form-control form-control-sm">
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label>NOMBRE UNIDAD</label>
-                                            <input type="text" placeholder="NOMBRE UNIDAD" class="form-control form-control-sm">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label>CURP</label>
-                                            <input type="text" placeholder="CURP" class="form-control form-control-sm">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label>PRESTADOR DE S.</label>
-                                            <input type="text" placeholder="PRESTADOR DE SERVICIOS" class="form-control form-control-sm">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label>TIPO DE PERSONA</label>
-                                            <input type="text" placeholder="TIPO DE PERSONA" class="form-control form-control-sm">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label>CÉDULA PROFECIONAL</label>
-                                            <input type="text" placeholder="CÉDULA PROFECIONAL" class="form-control form-control-sm">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label>SERVICIO</label>
-                                            <input type="text" placeholder="SERVICIO" class="form-control form-control-sm">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label>FECHA</label>
-                                            <input type="date" class="form-control form-control-sm">
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                 </div>                        
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12">               
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header d-flex align-items-center">
                                 <h2 class="h5 display display">Datos del Paciente</h2>
                             </div>
                             <div class="card-block"> 
-                                <div class="row">
+                                <div class="row">                                    
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>No. Afiliación</label>
-                                            <input ng-model="consulta.numberAfiliacion" ng-keypress="($event.charCode == 13)?buscarUsuarioByAfiliacion():return" type="text" placeholder="No. Afiliación" class="form-control form-control-sm">
+                                            <input ng-model="consulta['noAfiliacion']" ng-model="consulta.numberAfiliacion" ng-keypress="($event.charCode == 13)?buscarUsuarioByAfiliacion():return" type="text" placeholder="No. Afiliación" class="form-control form-control-sm">
                                         </div>
                                         <div class="form-group">
                                             <label>Nombre(s)</label>
-                                            <input type="text" placeholder="Nombre(s)" class="form-control form-control-sm">
+                                            <input ng-model="consulta['nombrePaciente']" type="text" placeholder="Nombre(s)" class="form-control form-control-sm">
                                         </div>
                                         <div class="form-group">
                                             <label>Apellidos</label>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Paterno" class="form-control form-control-sm">
+                                                    <input ng-model="consulta['apellidoPaterno']" type="text" placeholder="Paterno" class="form-control form-control-sm">
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Materno" class="form-control form-control-sm">
+                                                    <input ng-model="consulta['apellidoMaterno']" type="text" placeholder="Materno" class="form-control form-control-sm">
                                                 </div>
                                             </div>                                    
                                         </div>
                                         <div class="form-group">
                                             <label>Fecha de Nacimiento</label>
-                                            <input type="date" class="form-control form-control-sm">
+                                            <input ng-model="consulta['dobPaciente']" type="date" class="form-control form-control-sm">
                                         </div>                                
-
                                     </div>                            
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Relación Temporal</label>                                    
                                             <div class="select">
-                                                <select name="rt" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                </select>
+                                                <select ng-model="consulta['rtPaciente']" class="form-control form-control-sm"                                                
+                                                    ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                    <option selected disabled hidden></option>
+                                                </select>                                                
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Curp</label>
-                                            <input type="text" placeholder="Curp" class="form-control form-control-sm">
+                                            <input ng-model="consulta['curpPaciente']" type="text" placeholder="Curp" class="form-control form-control-sm">
                                         </div>                                                               
                                         <div class="form-group">
                                             <label>Edad / Sexo</label>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Edad" class="form-control form-control-sm">
+                                                    <input ng-model="consulta['edadPaciente']" type="text" placeholder="Edad" class="form-control form-control-sm">
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Sexo" class="form-control form-control-sm">
+                                                    <input ng-model="consulta['sexoPaciente']" type="text" placeholder="Sexo" class="form-control form-control-sm">
                                                 </div>
                                             </div>                                    
                                         </div>
                                         <div class="form-group">
                                             <label>Clave de Edad</label>
                                             <div class="select">
-                                                <select name="claveEdad" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
+                                                 <select ng-model="consulta['claveEdadPaciente']" class="form-control form-control-sm" 
+                                                ng-options="cep.id_clave as cep.nombre for cep in dataClavePersona">
+                                                    <option selected disabled hidden></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -153,22 +106,18 @@
                                         <div class="form-group">
                                             <label>Derechohabiencia</label>
                                             <div class="select">
-                                                <select name="derechohabiencia" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
+                                                <select ng-model="consulta['derechohabiencia']" class="form-control form-control-sm" 
+                                                ng-options="drcho.id_derechohabiencias as drcho.tipo_derechohabiencias for drcho in dataDerechohabiencia">
+                                                    <option selected disabled hidden></option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Discapacidad</label>
                                             <div class="select">
-                                                <select name="discapacidad" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
+                                                <select ng-model="consulta['discapacidad']" class="form-control form-control-sm" 
+                                                ng-options="disca.id_discapacidad as disca.tipo_discapacidad for disca in dataDiscapacidad">
+                                                    <option selected disabled hidden></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -176,592 +125,593 @@
                                             <label>Mediciones Peso / Talla</label>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Peso" class="form-control form-control-sm">
+                                                    <input ng-model="consulta['pesoPaciente']" type="text" placeholder="Peso" class="form-control form-control-sm">
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Talla" class="form-control form-control-sm">
+                                                    <input ng-model="consulta['tallaPaciente']" type="text" placeholder="Talla" class="form-control form-control-sm">
                                                 </div>
                                             </div>                                    
                                         </div>                                                     
                                     </div>
-                                    <div class="col-lg-3">                               
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Identificación</label>
                                             <div class="i-checks">
-                                                <input id="checkboxCustom2" type="checkbox" value="" checked="" class="form-control-custom">
+                                                <input ng-model="consulta['seguroPopular']" id="checkboxCustom2" type="checkbox" value="" checked="" class="form-control-custom">
                                                 <label for="checkboxCustom2">Seguro Popular</label>
                                             </div>
                                             <div class="i-checks">
-                                                <input id="checkboxCustom3" type="checkbox" value=""  class="form-control-custom">
+                                                <input ng-model="consulta['prospera']" id="checkboxCustom3" type="checkbox" value=""  class="form-control-custom">
                                                 <label for="checkboxCustom3">Prospera</label>
                                             </div>
                                             <div class="i-checks">
-                                                <input id="checkboxCustom4" type="checkbox" value=""  class="form-control-custom">
+                                                <input ng-model="consulta['indigena']" id="checkboxCustom4" type="checkbox" value=""  class="form-control-custom">
                                                 <label for="checkboxCustom4">Indígena</label>
                                             </div>
                                             <div class="i-checks">
-                                                <input id="checkboxCustom5" type="checkbox" value="" class="form-control-custom">
+                                                <input ng-model="consulta['migrante']" id="checkboxCustom5" type="checkbox" value="" class="form-control-custom">
                                                 <label for="checkboxCustom5">Migrante</label>
                                             </div>
                                         </div>                                
-                                    </div> 
-                                </div>                        
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="col-lg-6">               
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Diagnóstico</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>Diagnóstico del Paciente</label>
-                                            <textarea class="form-control" rows="5"></textarea>                                        
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Tipo de Consulta</label>
-                                            <select name="tipoConsultas" ng-change="changeTipoConsulta()" ng-model="tipoConsulta" class="form-control form-control-sm">
-                                                <option selected disabled hidden></option>
-                                                <option value="0">NINGUNO</option>                                                
-                                                <option ng-repeat="tipo in tipoConsultas" ng-selected="tipoConsulta == tipo.id_tipo_consulta" value="{{tipo.id_tipo_consulta}}">{{tipo.nombre}}</option>
-                                                <option value="10">AMBOS</option>
-                                            </select>
-                                        </div>
                                     </div>
-                                </div>                        
-                            </div>
+                                </div>
+                            </div>                        
                         </div>
                     </div>
-                    <div class="col-lg-6">               
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Cobertura</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">                                        
-                                            <label>Programa Según Motivo</label>                                    
-                                            <div class="select">
-                                                <select name="rt" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">                                       
-                                            <label>IMC</label>                                    
-                                            <div class="select">
-                                                <select name="rt" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                </select>
-                                            </div>
-                                        </div>                                    
-                                        <div class="form-group">
-                                            <label></label>                                           
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom6" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom6">Primera vez en el año</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">                                        
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom7" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom7">Sint. Respiratorio TB</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                        
-                            </div>
+                </div> 
+                <div class="col-lg-6">               
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Diagnóstico</h2>
                         </div>
-                    </div>
-                    <div class="col-lg-12" ng-hide="disabledReproductiva">               
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Salud Productiva</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card">
-                                            <div class="card-header d-flex align-items-center">
-                                                <h2 class="h5 display display">Embarazo</h2>
-                                            </div>
-                                            <div class="card-block"> 
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label>Relación Temporal</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Trimestre Gestacional</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label></label>                                           
-                                                            <div class="i-checks">
-                                                                <input id="checkboxCustom10" type="checkbox" value="" class="form-control-custom">
-                                                                <label for="checkboxCustom10">Alto Riesgo Primera Vez</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label>Complicaciones</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Otras Acciones</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>                                                    
-                                                    </div>
-                                                </div>                        
-                                            </div>
-                                        </div>
+                        <div class="card-block"> 
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Diagnóstico del Paciente</label>
+                                        <textarea class="form-control" rows="5"></textarea>                                        
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="card">
-                                            <div class="card-header d-flex align-items-center">
-                                                <h2 class="h5 display display">Puerperio</h2>
-                                            </div>
-                                            <div class="card-block"> 
-                                                <div class="row">
-                                                    <div class="col-lg-6">                                                    
-                                                        <div class="form-group">
-                                                            <label>RT por Perperio</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Aceptante de PF</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label></label>                                           
-                                                            <div class="i-checks">
-                                                                <input id="checkboxCustom11" type="checkbox" value="" class="form-control-custom">
-                                                                <label for="checkboxCustom11">Terapia Hormonal (Menopausia)</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label>RT por infección Puerperal</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Trimestre Gestacional</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>                                                    
-                                                    </div>
-                                                </div>                        
-                                            </div>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>Tipo de Consulta</label>
+                                        <select name="tipoConsultas" ng-change="changeTipoConsulta()" ng-model="tipoConsulta" class="form-control form-control-sm">
+                                            <option selected disabled hidden></option>
+                                            <option value="0">NINGUNO</option>                                                
+                                            <option ng-repeat="tipo in tipoConsultas" ng-selected="tipoConsulta == tipo.id_tipo_consulta" value="{{tipo.id_tipo_consulta}}">{{tipo.nombre}}</option>
+                                            <option value="10">AMBOS</option>
+                                        </select>
                                     </div>
-                                </div>                        
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12" ng-hide="disabledNinio">          
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Salud del Niño</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="card">                                        
-                                            <div class="card-block"> 
-                                                <div class="row">
-
-                                                    <div class="col-lg-6">                                                    
-                                                        <div class="form-group">
-                                                            <label>Niño Sano</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>IMC</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">                                        
-                                                            <div class="i-checks">
-                                                                <input id="checkboxCustom12" type="checkbox" value="" class="form-control-custom">
-                                                                <label for="checkboxCustom12">Confirmación de Cáncer</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">                                        
-                                                            <div class="i-checks">
-                                                                <input id="checkboxCustom13" type="checkbox" value="" class="form-control-custom">
-                                                                <label for="checkboxCustom13">Madre Informada</label>
-                                                            </div>
-                                                        </div>                                                    
-                                                    </div>                                                
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label>Result. Battelle (16m - 4a)</label>
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Aplicación Cédula Cáncer</label>
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>                                                    
-                                                    </div>
-                                                </div>                        
-                                            </div>
-                                        </div>                                    
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card">
-                                            <div class="card-header d-flex align-items-center">
-                                                <h2 class="h5 display display">Prueba EDI < 5 años</h2>
-                                            </div>
-                                            <div class="card-block"> 
-                                                <div class="row">
-                                                    <div class="col-lg-12">                                                    
-                                                        <div class="form-group">
-                                                            <label>Tipo</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Resultado</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>                                                
-                                                </div>                        
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card">
-                                            <div class="card-header d-flex align-items-center">
-                                                <h2 class="h5 display display">EDA's</h2>
-                                            </div>
-                                            <div class="card-block"> 
-                                                <div class="row">
-                                                    <div class="col-lg-6">                                                    
-                                                        <div class="form-group">
-                                                            <label>Relación Temporal</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Plan de Tratamiento</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label></label>
-                                                            <div class="i-checks">
-                                                                <input id="checkboxCustom14" type="checkbox" value="" class="form-control-custom">
-                                                                <label for="checkboxCustom14">Recuperado</label>
-                                                            </div>                                                        
-                                                        </div>                                                    
-                                                    </div> 
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label>No. de Sobres VSO Tratamiento</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>1</option>
-                                                                    <option>3</option>
-                                                                    <option>5</option>
-                                                                    <option>10</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>No. de Sobres VSO Promoción</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>1</option>
-                                                                    <option>3</option>
-                                                                    <option>5</option>
-                                                                    <option>10</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>                        
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card">
-                                            <div class="card-header d-flex align-items-center">
-                                                <h2 class="h5 display display">IRA's</h2>
-                                            </div>
-                                            <div class="card-block"> 
-                                                <div class="row">
-                                                    <div class="col-lg-12">                                                    
-                                                        <div class="form-group">
-                                                            <label>Relación Temporal</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Tipo de Tratamiento</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Neumonía</label>                                    
-                                                            <div class="select">
-                                                                <select name="rt" class="form-control form-control-sm">
-                                                                    <option>option 1</option>
-                                                                    <option>option 2</option>
-                                                                    <option>option 3</option>
-                                                                    <option>option 4</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>                                                
-                                                </div>                        
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                        
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">               
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Otros Eventos</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">                                       
-                                            <label>Primera Vez</label>                                    
-                                            <div class="select">
-                                                <select name="rt" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">                                       
-                                            <label>Subsecuente</label>                                    
-                                            <div class="select">
-                                                <select name="rt" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">                                       
-                                            <label>Rereferido Por:</label>                                    
-                                            <div class="select">
-                                                <select name="rt" class="form-control form-control-sm">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">                                    
-                                        <div class="form-group">
-                                            <label></label>                                           
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom20" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom20">Contrareferido</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label></label>                                           
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom15" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom15">Unidad Consultante TM</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label></label>                                           
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom16" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom16">En control y Seguimiento</label>
-                                            </div>
-                                        </div>                                    
-                                    </div>
-                                </div>                        
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">               
-                        <div class="card">
-                            <div class="card-header d-flex align-items-center">
-                                <h2 class="h5 display display">Promoción de la Salud</h2>
-                            </div>
-                            <div class="card-block"> 
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label></label>                                           
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom17" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom17">Consulta Integrada Linea de Vida</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">                                    
-                                        <div class="form-group">
-                                            <label></label>                                           
-                                            <div class="i-checks">
-                                                <input id="checkboxCustom18" type="checkbox" value="" class="form-control-custom">
-                                                <label for="checkboxCustom18">Presenta Cartilla</label>
-                                            </div>
-                                        </div>                                                                     
-                                    </div>
-                                </div>                        
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="col-lg-12">
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <button class="btn btn-secondary">Cancelar</button>
-                                <button class="btn btn-primary">Guardar</button>
-                            </div>
+                                </div>
+                            </div>                        
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-    </section>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Cobertura</h2>
+                        </div>
+                        <div class="card-block"> 
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">                                        
+                                        <label>Programa Según Motivo</label>                                    
+                                        <div class="select">
+                                            <select name="rt" class="form-control form-control-sm">
+                                                <option>option 1</option>
+                                                <option>option 2</option>
+                                                <option>option 3</option>
+                                                <option>option 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">                                       
+                                        <label>IMC</label>                                    
+                                        <div class="select">
+                                            <select name="rt" class="form-control form-control-sm">
+                                                <option>option 1</option>
+                                                <option>option 2</option>
+                                                <option>option 3</option>
+                                                <option>option 4</option>
+                                            </select>
+                                        </div>
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <label></label>                                           
+                                        <div class="i-checks">
+                                            <input ng-model="consulta[field.model]" id="checkboxCustom6" type="checkbox" value="" class="form-control-custom">
+                                            <label for="checkboxCustom6">Primera vez en el año</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">                                        
+                                        <div class="i-checks">
+                                            <input ng-model="consulta[field.model]" id="checkboxCustom7" type="checkbox" value="" class="form-control-custom">
+                                            <label for="checkboxCustom7">Sint. Respiratorio TB</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" ng-hide="disabledReproductiva">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Salud Productiva</h2>
+                        </div>
+                        <div class="card-block"> 
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h2 class="h5 display display">Embarazo</h2>
+                                        </div>
+                                        <div class="card-block"> 
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Relación Temporal</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Trimestre Gestacional</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label></label>                                           
+                                                        <div class="i-checks">
+                                                            <input ng-model="consulta[field.model]" id="checkboxCustom10" type="checkbox" value="" class="form-control-custom">
+                                                            <label for="checkboxCustom10">Alto Riesgo Primera Vez</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Complicaciones</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Otras Acciones</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h2 class="h5 display display">Puerperio</h2>
+                                        </div>
+                                        <div class="card-block"> 
+                                            <div class="row">
+                                                <div class="col-lg-6">                                                    
+                                                    <div class="form-group">
+                                                        <label>RT por Perperio</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Aceptante de PF</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label></label>                                           
+                                                        <div class="i-checks">
+                                                            <input ng-model="consulta[field.model]" id="checkboxCustom11" type="checkbox" value="" class="form-control-custom">
+                                                            <label for="checkboxCustom11">Terapia Hormonal (Menopausia)</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>RT por infección Puerperal</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Trimestre Gestacional</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" ng-hide="disabledNinio">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Salud del Niño</h2>
+                        </div>
+                        <div class="card-block"> 
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card">                                        
+                                        <div class="card-block"> 
+                                            <div class="row">
+
+                                                <div class="col-lg-6">                                                    
+                                                    <div class="form-group">
+                                                        <label>Niño Sano</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>IMC</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">                                        
+                                                        <div class="i-checks">
+                                                            <input ng-model="consulta[field.model]" id="checkboxCustom12" type="checkbox" value="" class="form-control-custom">
+                                                            <label for="checkboxCustom12">Confirmación de Cáncer</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">                                        
+                                                        <div class="i-checks">
+                                                            <input ng-model="consulta[field.model]" id="checkboxCustom13" type="checkbox" value="" class="form-control-custom">
+                                                            <label for="checkboxCustom13">Madre Informada</label>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>                                                
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Result. Battelle (16m - 4a)</label>
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Aplicación Cédula Cáncer</label>
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>                        
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h2 class="h5 display display">Prueba EDI < 5 años</h2>
+                                        </div>
+                                        <div class="card-block"> 
+                                            <div class="row">
+                                                <div class="col-lg-12">                                                    
+                                                    <div class="form-group">
+                                                        <label>Tipo</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Resultado</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            </div>                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h2 class="h5 display display">EDA's</h2>
+                                        </div>
+                                        <div class="card-block"> 
+                                            <div class="row">
+                                                <div class="col-lg-6">                                                    
+                                                    <div class="form-group">
+                                                        <label>Relación Temporal</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Plan de Tratamiento</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label></label>
+                                                        <div class="i-checks">
+                                                            <input ng-model="consulta[field.model]" id="checkboxCustom14" type="checkbox" value="" class="form-control-custom">
+                                                            <label for="checkboxCustom14">Recuperado</label>
+                                                        </div>                                                        
+                                                    </div>                                                    
+                                                </div> 
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>No. de Sobres VSO Tratamiento</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>1</option>
+                                                                <option>3</option>
+                                                                <option>5</option>
+                                                                <option>10</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>No. de Sobres VSO Promoción</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>1</option>
+                                                                <option>3</option>
+                                                                <option>5</option>
+                                                                <option>10</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h2 class="h5 display display">IRA's</h2>
+                                        </div>
+                                        <div class="card-block"> 
+                                            <div class="row">
+                                                <div class="col-lg-12">                                                    
+                                                    <div class="form-group">
+                                                        <label>Relación Temporal</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Tipo de Tratamiento</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Neumonía</label>                                    
+                                                        <div class="select">
+                                                            <select name="rt" class="form-control form-control-sm">
+                                                                <option>option 1</option>
+                                                                <option>option 2</option>
+                                                                <option>option 3</option>
+                                                                <option>option 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            </div>                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Otros Eventos</h2>
+                        </div>
+                        <div class="card-block"> 
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">                                       
+                                        <label>Primera Vez</label>                                    
+                                        <div class="select">
+                                            <select name="rt" class="form-control form-control-sm">
+                                                <option>option 1</option>
+                                                <option>option 2</option>
+                                                <option>option 3</option>
+                                                <option>option 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">                                       
+                                        <label>Subsecuente</label>                                    
+                                        <div class="select">
+                                            <select name="rt" class="form-control form-control-sm">
+                                                <option>option 1</option>
+                                                <option>option 2</option>
+                                                <option>option 3</option>
+                                                <option>option 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">                                       
+                                        <label>Rereferido Por:</label>                                    
+                                        <div class="select">
+                                            <select name="rt" class="form-control form-control-sm">
+                                                <option>option 1</option>
+                                                <option>option 2</option>
+                                                <option>option 3</option>
+                                                <option>option 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">                                    
+                                    <div class="form-group">
+                                        <label></label>                                           
+                                        <div class="i-checks">
+                                            <input ng-model="consulta[field.model]" id="checkboxCustom20" type="checkbox" value="" class="form-control-custom">
+                                            <label for="checkboxCustom20">Contrareferido</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label></label>                                           
+                                        <div class="i-checks">
+                                            <input ng-model="consulta[field.model]" id="checkboxCustom15" type="checkbox" value="" class="form-control-custom">
+                                            <label for="checkboxCustom15">Unidad Consultante TM</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label></label>                                           
+                                        <div class="i-checks">
+                                            <input ng-model="consulta[field.model]" id="checkboxCustom16" type="checkbox" value="" class="form-control-custom">
+                                            <label for="checkboxCustom16">En control y Seguimiento</label>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Promoción de la Salud</h2>
+                        </div>
+                        <div class="card-block"> 
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label></label>                                           
+                                        <div class="i-checks">
+                                            <input ng-model="consulta[field.model]" id="checkboxCustom17" type="checkbox" value="" class="form-control-custom">
+                                            <label for="checkboxCustom17">Consulta Integrada Linea de Vida</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">                                    
+                                    <div class="form-group">
+                                        <label></label>                                           
+                                        <div class="i-checks">
+                                            <input ng-model="consulta[field.model]" id="checkboxCustom18" type="checkbox" value="" class="form-control-custom">
+                                            <label for="checkboxCustom18">Presenta Cartilla</label>
+                                        </div>
+                                    </div>                                                                     
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <button class="btn btn-secondary">Cancelar</button>
+                            <button ng-click="saveConsulta()" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
 </div>

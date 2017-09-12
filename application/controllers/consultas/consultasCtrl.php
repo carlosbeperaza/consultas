@@ -25,6 +25,38 @@ class ConsultasCtrl extends CI_Controller {
         $data['data'] = $this->Consultas_model->getTipoConsulta();
         echo json_encode($data);
     }
+
+    public function getFieldsInfoGeneral() {
+        $data['data'] = $this->Consultas_model->getFieldsInfoGeneral();
+        echo json_encode($data);
+    }
+
+    public function getFieldsPaciente() {
+        $data['data'] = $this->Consultas_model->getFieldsPaciente();
+        echo json_encode($data);
+    }
+
+    public function getDataRelacionTemporal()
+    {
+        $data['data'] = $this->Consultas_model->getDataRelacionTemporal();
+        echo json_encode($data);
+    }
+    public function getDataDerechohabiencia(){
+
+         $data['data'] = $this->Consultas_model->getDataDerechohabiencia();
+        echo json_encode($data);
+    }
+    public function getDataDiscapacidad(){
+        
+         $data['data'] = $this->Consultas_model->getDataDiscapacidad();
+        echo json_encode($data);
+    }
+    public function getDataClavePersona()
+    {
+        $data['data'] = $this->Consultas_model->getDataClavePersona();
+        echo json_encode($data);
+
+    }
           
 
 }
