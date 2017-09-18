@@ -8,7 +8,7 @@ app.factory('dashboardService', ['$http',
             },            
             getProgramas: function () {
                 return $http.post("dashboard/DashboardCtrl/getProgramas").then(function (response) {
-                    return response;
+                    return response.data;
                 });
             }
 

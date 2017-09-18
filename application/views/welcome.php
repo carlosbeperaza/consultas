@@ -32,6 +32,7 @@
     <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
     <script src="<?php base_url()?>resources/js/oclazyload/ocLazyLoad.min.js"></script>
+    <script src="<?php base_url()?>resources/js/satellizer/satellizer.js"></script>
     <script src="<?php base_url()?>resources/app.js"></script>
     <script src="<?php base_url()?>resources/main.js"></script>
     <script src="<?php base_url()?>resources/config.constant.js"></script>

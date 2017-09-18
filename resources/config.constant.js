@@ -15,7 +15,8 @@ app.constant('JS_REQUIRES', {
 
         // 'loginControllers': 'angular-app/controllers/loginControllers.js',
         // 'loginServices': 'angular-app/services/loginServices.js',
-        
+        'signinCtrl': 'resources/js/controllers/login/signinCtrl.js',
+        'signinService': 'resources/js/services/login/signinService.js',
         'dashboardCtrl': 'resources/js/controllers/dashboard/dashboardCtrl.js',
         'dashboardService': 'resources/js/services/dashboard/dashboardService.js',
         'consultasCtrl': 'resources/js/controllers/consultas/consultasCtrl.js',

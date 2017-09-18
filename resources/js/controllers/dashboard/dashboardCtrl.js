@@ -4,7 +4,7 @@ app.controller('dashboardCtrl',['$scope', 'dashboardService',
         $scope.name="Micheal P. Strand";
 
         dashboardService.getProgramas().then(function(response){
-        	console.log(response.data);
+        	console.log(response.programas);
         });
 
 }]);

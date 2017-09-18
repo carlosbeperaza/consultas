@@ -3,10 +3,19 @@
 /**
  * Configuración de las rutas
  */
-app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazyLoadProvider','JS_REQUIRES', '$provide', '$httpProvider',
-	function($stateProvider , $urlRouterProvider,  $controllerProvider,  $ocLazyLoadProvider,  jsRequires,   $provide,   $httpProvider){
+app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazyLoadProvider','JS_REQUIRES', '$authProvider','$provide', '$httpProvider',
+	function($stateProvider , $urlRouterProvider,  $controllerProvider,  $ocLazyLoadProvider,  jsRequires,$authProvider,  $provide,   $httpProvider){
 
-	app.controller = $controllerProvider.register;
+   //Setellizer-Token Parameters Configuration
+   $authProvider.loginUrl = "http://localhost/consultas/auth/auth/login";
+   $authProvider.signupUrl = "http://localhost/consultas/auth/auth/logoutUser";
+   $authProvider.tokenName = "X_AUTH_TOKEN";
+   $authProvider.tokenPrefix = "";
+    //Previo a abrir la página, obtengo del local storage el token existente
+    app.token = localStorage.getItem($authProvider.tokenName);
+        
+
+    app.controller = $controllerProvider.register;
     // app.directive = $compileProvider.directive;
     app.factory = $provide.factory;
     app.service = $provide.service;
@@ -26,7 +35,8 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         // HOME STATES AND NESTED VIEWS ========================================
         .state('login', {
             url: '/login',
-            templateUrl: 'usuarios/UsuariosCtrl'
+            templateUrl: 'usuarios/UsuariosCtrl',
+            resolve: loadSequence('signinCtrl')
         })
         .state('register', {
             url: '/register',
@@ -58,26 +68,65 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
             templateUrl: 'consultas/consultasCtrl',
             resolve: loadSequence('consultasCtrl','consultasService', 'pacientesService')
         })
-        // .state('login', {dashboardService
-        //     url: '/login',
-        //     templateUrl: 'partials/login.html'
-        // })
-         // nested list with custom controller
-        // .state('home.list', {
-        //     url: '/list',
-        //     templateUrl: 'partials/partial-home-list.html',
-        //     controller: function($scope) {
-        //         $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
-        //     }
-        // })
-        // // nested list with just some random string data
-        // .state('home.paragraph', {
-        //     url: '/paragraph',
-        //     template: 'I could sure use a drink right now.'
-        // })
         ;
 
-
+    $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
+    $httpProvider.defaults.headers.common['Access-Control-Max-Age'] = 1;
+    $httpProvider.defaults.headers.common['X_AUTH_TOKEN'] = app.token;    
+    $httpProvider.defaults.headers.common['Content-Type'] = undefined,
+    $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache',
+    
+    $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+        var config = $authProvider.SatellizerConfig;
+        var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
+        return {
+            request: function (httpConfig) {
+                app.token = localStorage.getItem(tokenName);
+                if (app.token && app.token !== 'null' && config.httpInterceptor) {
+                    app.token =config.authHeader === 'Authorization' ? 'Bearer ' + app.token : app.token;
+                    httpConfig.headers[config.tokenName] = app.token;
+                }
+                return httpConfig;                                
+            },
+            response: function (response) {
+                if (!response.config.cache) {
+                    if(response.data.code === 0){
+                         var newToken = response.data.X_AUTH_TOKEN;
+//                    var oldToken = app.token;
+                        localStorage.setItem(tokenName, newToken);
+                        app.token = localStorage.getItem(tokenName);
+                    }
+                    if(response.data.code === 1){
+                         return $q.reject(response);
+                    }
+                     if(response.data.code === 3){     
+                         alert("Token expired");
+                         $location.path('/login/signin');
+                         return $q.reject(response);
+                    }
+                    
+                   
+                    
+                }
+                return response || $q.when(response);
+            },
+            responseError: function (response) { 
+                if (response.status === 404) {
+                    alert("NOT FOUND ERROR 400!!");
+                }
+                if (response.status === 500) {
+                    alert("INTERNAL SERVER ERROR 500!!");
+                }
+                 if (response.status === 401) {
+                    $location.path('/login/signin');
+                    alert("UNAUTHORIZED 401!!");
+                }
+                return $q.reject(response);
+            }
+        };
+    }]);
+                
+                
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
         function loadSequence() {
             var _args = arguments;

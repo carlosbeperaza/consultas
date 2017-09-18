@@ -2,7 +2,7 @@
 
 angular.module("moduleDependencies", 
     //cargar toda las dependecias para el modulo de la applicacion
-    ['ui.router','oc.lazyLoad']);
+    ['ui.router','oc.lazyLoad','satellizer']);
 
 // var routerApp = angular.module('routerApp', ['ui.router']);
 

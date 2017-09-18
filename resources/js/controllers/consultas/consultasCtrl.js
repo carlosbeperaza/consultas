@@ -9,7 +9,6 @@ app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService
 
         consultasService.getTipoConsulta().then(function (response) {
             $scope.tipoConsultas = response.data;
-            console.log($scope.tipoConsultas);
         });
 
         $scope.changeTipoConsulta = function () {

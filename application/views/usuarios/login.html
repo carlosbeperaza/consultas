@@ -1,5 +1,5 @@
 <div class="page login-page">
-    <div class="container">
+    <div class="container" ng-controller="signinCtrl">
         <div class="form-outer text-center align-items-center">
             <div class="form-inner">
                 <div class="logo text-uppercase">
@@ -9,11 +9,18 @@
                 <form id="login-form" method="post">
                     <div class="form-group">
                         <label for="login-username" class="label-custom"></label>
-                        <input placeholder="User" id="login-username" type="text" name="loginUsername" required="">
+                        <input placeholder="User" id="login-username" ng-model="user.email" type="text" name="loginUsername" required="">
                     </div>
                     <div class="form-group">                        
-                        <input placeholder="Password" id="login-password" type="password" name="loginPassword" required="">
-                    </div><a id="login" ui-sref="app.dashboard" class="btn btn-primary">Login</a>
+                        <input placeholder="Password" id="login-password" type="password" name="loginPassword" ng-model="user.password" required="">
+                    </div>
+                    <div class="form-group">
+                        <button id="login" type="submit" ng-click="login()" class="btn btn-primary pull-right">                            
+                            <span>Login</span><i class="fa fa-arrow-circle-right"></i>
+                        </button>
+                    </div>
+                     
+                    <!--<a id="login" class="btn btn-primary" ng-click="login()">Login</a>-->
                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                 </form>
                 <a href="#" class="forgot-pass">Forgot Password?</a>
