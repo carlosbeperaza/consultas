@@ -13,32 +13,33 @@ app.constant('JS_REQUIRES', {
     //*** Scripts
     scripts: {
 
-        // 'loginControllers': 'angular-app/controllers/loginControllers.js',
-        // 'loginServices': 'angular-app/services/loginServices.js',
         'signinCtrl': 'resources/js/controllers/login/signinCtrl.js',
         'signinService': 'resources/js/services/login/signinService.js',
+
         'dashboardCtrl': 'resources/js/controllers/dashboard/dashboardCtrl.js',
         'dashboardService': 'resources/js/services/dashboard/dashboardService.js',
         'consultasCtrl': 'resources/js/controllers/consultas/consultasCtrl.js',
         'consultasService': 'resources/js/services/consultas/consultasService.js',
-        'pacientesService': 'resources/js/services/pacientes/pacientesService.js'
+        'pacientesService': 'resources/js/services/pacientes/pacientesService.js',
+        'reversoService': 'resources/js/services/consultas/reversoService.js',
+        'reversoCtrl': 'resources/js/controllers/consultas/reversoCtrl.js'
 
-        // 'itemCtrl': 'angular-app/controllers/ItemController.js',
-        // 'itemService': 'angular-app/services/myServices.js',        
-        // 'northwareAlert': 'angular-app/js/utils/northwareAlert.js',
+                // 'itemCtrl': 'angular-app/controllers/ItemController.js',
+                // 'itemService': 'angular-app/services/myServices.js',        
+                // 'northwareAlert': 'angular-app/js/utils/northwareAlert.js',
 
     },
     //*** angularJS Modules
     modules: [
-            // {
-            //     name: 'sweet-alert',
-            //     files: ['angular-app/js/sweetalert/sweet-alert.min.js', 'angular-app/js/sweetalert/sweet-alert.css']
-            // },{
-            //     name: 'dirPagination',
-            //     files: ['angular-app/js/dirPagination.js']
-            // },{
-            //     name: 'oitozero.ngSweetAlert',
-            //     files: ['angular-app/js/angular-sweetalert-promised/SweetAlert.min.js']
-            // }
+        // {
+        //     name: 'sweet-alert',
+        //     files: ['angular-app/js/sweetalert/sweet-alert.min.js', 'angular-app/js/sweetalert/sweet-alert.css']
+        // },{
+        //     name: 'dirPagination',
+        //     files: ['angular-app/js/dirPagination.js']
+        // },{
+        //     name: 'oitozero.ngSweetAlert',
+        //     files: ['angular-app/js/angular-sweetalert-promised/SweetAlert.min.js']
+        // }
     ]
 });

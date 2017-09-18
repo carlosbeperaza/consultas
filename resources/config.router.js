@@ -22,14 +22,14 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
     app.constant = $provide.constant;
     app.value = $provide.value;
 
-    // LAZY MODULES
-    $ocLazyLoadProvider.config({
-        debug: false,
-        events: true,
-        modules: jsRequires.modules
-    });
+        // LAZY MODULES
+        $ocLazyLoadProvider.config({
+            debug: false,
+            events: true,
+            modules: jsRequires.modules
+        });
 
-	$urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/login');
 
     $stateProvider
         // HOME STATES AND NESTED VIEWS ========================================
@@ -67,6 +67,11 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
             url: '/consulta',
             templateUrl: 'consultas/consultasCtrl',
             resolve: loadSequence('consultasCtrl','consultasService', 'pacientesService')
+        })
+        .state('app.reverso', {
+            url: '/reverso',
+            templateUrl: 'consultas/reversoCtrl',
+            resolve: loadSequence('reversoCtrl', 'reversoService')
         })
         ;
 
@@ -128,6 +133,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
                 
                 
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
+
         function loadSequence() {
             var _args = arguments;
             return {
@@ -163,4 +169,4 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         }
 
 
-}]);
+    }]);

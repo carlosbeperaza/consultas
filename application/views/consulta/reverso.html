@@ -1,0 +1,164 @@
+
+<?php $this->load->view('partials/sideNavbar.html');?>
+<div class="page home-page" ng-controller="reversoCtrl">    
+    <?php $this->load->view('partials/header.html');?>    
+    <!-- Counts Section -->
+    <div class="breadcrumb-holder">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item">Reverso</li>
+                <li class="breadcrumb-item active">Nuevo reverso</li>
+            </ul>
+        </div>
+    </div>
+    <section class="forms">
+        <div class="container-fluid">
+            <header> 
+                <h1 class="h2 display">Hoja Diaria de Consulta Externa / Reverso</h1>
+            </header>
+            <form>
+                <div class="row">
+
+                    <div class="col-lg-12">               
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center">
+                              <h2 class="h5 display display">Consultas y Atenciones de planificación familiar y/o detecciones</h2>
+                          </div>
+
+                          <div class="card-block"> 
+                            <div class="row"> 
+                                <div class="col-lg-3">
+                                    <div class="form-group" >
+                                        <label>Seleccione Metodos de Entrega</label>    
+                                        <div ng-repeat="metodos in metodoEntrega">                                
+                                            <div class="i-checks">
+                                                <input id="checkboxCustom{{metodos.id_metodo}}" type="checkbox" class="form-control-custom" ng-model="metodos.selected">
+                                                <label for="checkboxCustom{{metodos.id_metodo}}">{{metodos.nombre}}</label>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Planificacion Familiar</label>
+                                        <div class="i-checks" ng-repeat="plan in planFamiliar">
+                                            <input id="checkPlan{{plan.id_planificacion_familiar}}" type="checkbox" class="form-control-custom" ng-model="plan.selected">
+                                            <label for="checkPlan{{plan.id_planificacion_familiar}}">{{plan.nombre}}</label>
+                                        </div>                                           
+                                    </div>                                
+                                </div>                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div> 
+
+                <div class="col-lg-12">               
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h2 class="h5 display display">Detecciones, SINBA-SIS-DET-P</h2>
+                        </div>  
+                        <div class="card-block"> 
+                            <div class="row">  
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Resultado de las Detecciones</label>                                    
+                                        <div class="i-checks">
+                                            <div ng-repeat="datosDetecciones in detecciones">
+                                                <input id="checkboxDetecciones{{datosDetecciones.id_detecciones}}" type="checkbox" class="form-control-custom" ng-model="datosDetecciones.selected">
+                                                <label for="checkboxDetecciones{{datosDetecciones.id_detecciones}}">{{datosDetecciones.nombre_detecciones}}</label>
+                                                <div class="select col-lg-5">
+                                                    <select name="resultado1" class="form-control form-control-sm" ng-model="datosDetecciones.resultado">
+                                                        <option value="" selected disabled hidden>SELECCIONA</option>
+                                                        <option>Positivo</option>
+                                                        <option>Negavito</option>                                            
+                                                    </select>
+                                                </div>  
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div> 
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>ADICCIONES</label>
+                                        <div class="i-checks">
+                                            <div ng-repeat="datosAdicciones in dataAdicciones">
+                                                <input id="checkAdicciones{{datosAdicciones.id_adicciones}}" type="checkbox" class="form-control-custom" ng-model="datosAdicciones.selected" >
+                                                <label for="checkAdicciones{{datosAdicciones.id_adicciones}}">{{datosAdicciones.nombre_a}}</label>
+
+                                                <div class="select col-lg-5">
+                                                    <select name="resultado" class="form-control form-control-sm" ng-model="datosAdicciones.resultado">
+                                                        <option value="" selected disabled hidden>SELECCIONA</option>
+                                                        <option>Positivo</option>
+                                                        <option>Negavito</option>                                            
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="col-lg-4">                     
+                                    <div class="form-group">
+                                        <label>MUJERES</label>
+                                        <div class="i-checks">
+                                           <div ng-repeat="datosMujeres in dataMujeres">
+                                            <input id="checkMujeres{{datosMujeres.id_mujeres}}" type="checkbox" class="form-control-custom" ng-model="datosMujeres.selected">
+                                            <label for="checkMujeres{{datosMujeres.id_mujeres}}">{{datosMujeres.nombre_m}}</label>
+                                            <div class="select">
+                                             <select name="resultado" class="form-control form-control-sm" ng-model="datosMujeres.resultado">
+                                                    <option value="" selected disabled hidden>SELECCIONA</option>
+                                                    <option>Positivo</option>
+                                                    <option>Negavito</option>                                            
+                                              </select>
+                                            </div>    
+                                        </div>
+                                    </div>                             
+                                </div>
+                            </div> 
+                        </div> 
+                    </div> 
+                </div>    
+            </div> 
+
+            <div class="col-lg-12">               
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h2 class="h5 display display">Insumos Utilizados</h2>
+                    </div>
+                    <div class="card-block"> 
+                        <div class="row">
+                            <div ng-repeat="insumos in dataInsumos">
+                                <div class="i-checks" >
+                                    <input id="boxInsumo{{insumos.id_insumos}}" type="checkbox" name="name" ng-model="insumos.selected" class="form-control-custom col-lg-2">
+                                    <label for="boxInsumo{{insumos.id_insumos}}">{{insumos.nombre}}</label>
+
+                                    <div class="form-group">
+                                      <label>Cantidad</label>
+                                      <input type="number" placeholder="cantidad" name="cantidad" ng-model="insumos.cantidad" class="form-control form-control-sm col-lg-5">
+                                  </div>  
+                              </div>
+                          </div>
+                          <!-- <div><button ng-click="formSupplies(insumos)">SEND</button></div> -->
+                      </div>                                   
+                  </div>                                                         
+              </div>                        
+          </div>
+      </div>
+  </div> 
+  <div class="line"></div>
+  <div class="col-lg-12">
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <button class="btn btn-secondary">Cancelar</button>
+            <button class="btn btn-primary"  ng-click="formReverso(insumos)">Guardar</button>
+        </div>
+    </div>
+</div>
+</div>
+</form>
+</div>
+</section>   
+</div>
