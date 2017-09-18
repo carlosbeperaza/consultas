@@ -29,12 +29,17 @@ class DashboardCtrl extends CI_Controller {
 	public function getProgramas()
 	{
           $response = JWT\jwt_helper::VerifyToken($this->headers);
+          $data=array();
           if($response["code"]==0){
-              $data['data'] = $this->Dashboard_model->getProgramas();              
-              echo \json_encode(array("code" => $response["code"],"X_AUTH_TOKEN" => $response["X_AUTH_TOKEN"],"msg" => $response["msg"], "programas"=>$data));
+              //code 0 significa que el usuario exsite y esta bien su token.
+              //aqui realizar todo los trabajos.
+              $data = $this->Dashboard_model->getProgramas();              
+//              echo \json_encode(array("code" => $response["code"],"X_AUTH_TOKEN" => $response["X_AUTH_TOKEN"],"msg" => $response["msg"], "programas"=>$data));
           }else{
-            echo \json_encode(array("code" => $response["code"],"X_AUTH_TOKEN" => $response["X_AUTH_TOKEN"],"msg" => $response["msg"]));
+              //aqui hay algo mal con el token.. ya expiro o esta mal.
+//            echo \json_encode(array("code" => $response["code"],"X_AUTH_TOKEN" => $response["X_AUTH_TOKEN"],"msg" => $response["msg"]));
           }
+          echo \json_encode(array("code" => $response["code"],"X_AUTH_TOKEN" => $response["X_AUTH_TOKEN"],"msg" => $response["msg"], "programas"=>$data));
 	}
 
 }

@@ -12,19 +12,20 @@ class Auth extends CI_Controller
     public function login(){
             //verify if there is a token.. if ther is..evualuate and renew
            $request = json_decode(file_get_contents("php://input"));
-           $email = $request->email;
+           if($request!==FALSE){
+               $email = $request->email;
            $password = $request->password;
+           }           
            $this->load->model('login/Login_model','auth_model');
-           $userData = $this->auth_model->login($email,$password);
-           $temp= array("id_usuario"=>$userData->id_usuario  ,"email"=>$userData->email);
-           $user =(object)$temp;
-           $userInfo = array("nombre"=>$userData->nombre,"primerApellido"=>$userData->primer_apellido,
+           $userData = $this->auth_model->login($email,$password);           
+
+           if($userData !== FALSE){
+            $temp= array("id_usuario"=>$userData->id_usuario  ,"email"=>$userData->email);
+            $user =(object)$temp;
+            $userInfo = array("nombre"=>$userData->nombre,"primerApellido"=>$userData->primer_apellido,
                              "secundoApellido"=>$userData->secundo_apellido,
                              "email"=>$userData->email,
                              "userAvatar"=>$userData->user_avatar);
-
-           if($userData !== FALSE){
-            //ha hecho login
             $user->iat = time();
             $user->exp = time() + 300;
             $jwt = JWT\jwt_helper::encode($user, 'M3g@AL13nH@sH');

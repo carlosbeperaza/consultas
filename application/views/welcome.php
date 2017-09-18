@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html >
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,17 +31,20 @@
     <!-- JS (load angular, ui-router, and our custom js file) -->
     <script src="<?php base_url()?>resources/js/angular.js"></script>
     <script src="<?php base_url()?>resources/js/angular-ui-router.min.js"></script>
-    <script src="<?php base_url()?>resources/js/oclazyload/ocLazyLoad.min.js"></script>
-    <script src="<?php base_url()?>resources/js/satellizer/satellizer.js"></script>
+    <script src="<?php base_url()?>resources/js/components/oclazyload/ocLazyLoad.min.js"></script>
+    <script src="<?php base_url()?>resources/js/components/satellizer/satellizer.js"></script>
+    <script src="<?php base_url()?>resources/js/components/ngstorage/ngStorage.min.js"></script>
     <script src="<?php base_url()?>resources/app.js"></script>
     <script src="<?php base_url()?>resources/main.js"></script>
     <script src="<?php base_url()?>resources/config.constant.js"></script>
     <!-- <script src="angular-app/services/myServices.js"></script> -->
     <script src="<?php base_url()?>resources/config.router.js"></script>    
+    <script src="<?php base_url()?>resources/js/controllers/mainCtrl.js"></script>
 </head>
 
 <!-- apply our angular app to our site -->
-<body ng-app="app">
+<body  ng-app="app" >
+    <div ng-controller="AppCtrl">
     
     
     <div ui-view></div>
@@ -58,6 +61,6 @@
     <script src="<?php base_url()?>resources/js/chart.js"></script>
     <!-- <script src="<?php base_url()?>resources/js/charts-home.js"></script> -->
     <script src="<?php base_url()?>resources/js/front.js"></script>
-
+    </div>
 </body>
 </html>

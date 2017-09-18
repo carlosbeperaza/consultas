@@ -1,7 +1,7 @@
 var app = angular.module('app', ['moduleDependencies']);
 
-app.run(['$rootScope', '$state', '$stateParams','$location',
-    function ($rootScope, $state, $stateParams,$location) {
+app.run(['$rootScope', '$state', '$stateParams','$localStorage',
+    function ($rootScope, $state, $stateParams,$localStorage) {
     
         // Set some reference to access them from any scope
         $rootScope.$state = $state;
@@ -16,10 +16,5 @@ app.run(['$rootScope', '$state', '$stateParams','$location',
             version: '1.0', // current version
             year: ((new Date()).getFullYear()) // automatic current year (for copyright information)
          
-        };
-        $rootScope.user = {
-            name: 'Micheal Strand',
-            job: 'ng-Dev',
-            picture: ' '
         };
     }]);
