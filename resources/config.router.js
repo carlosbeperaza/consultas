@@ -94,10 +94,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
                 return httpConfig;                                
             },
             response: function (response) {
-                if (!response.config.cache) {
-                    if(response.data){
-                        console.log("data in");
-                    }
+                if (!response.config.cache) {                  
                     if(response.data.code === 0){
                          var newToken = response.data.X_AUTH_TOKEN;
 //                    var oldToken = app.token;
