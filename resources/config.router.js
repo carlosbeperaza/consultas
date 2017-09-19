@@ -6,14 +6,9 @@
 app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazyLoadProvider','JS_REQUIRES', '$authProvider','$provide', '$httpProvider',
 	function($stateProvider , $urlRouterProvider,  $controllerProvider,  $ocLazyLoadProvider,  jsRequires,$authProvider,  $provide,   $httpProvider){
 
-   //Setellizer-Token Parameters Configuration
-   $authProvider.loginUrl = "http://localhost/consultas/auth/auth/login";
-   $authProvider.signupUrl = "http://localhost/consultas/auth/auth/logoutUser";
-   $authProvider.tokenName = "X_AUTH_TOKEN";
-   $authProvider.tokenPrefix = "";
+    //Setellizer-Token Parameters Configuration  
     //Previo a abrir la página, obtengo del local storage el token existente
-    app.token = localStorage.getItem($authProvider.tokenName);
-        
+    app.token = localStorage.getItem($authProvider.tokenName);      
 
     app.controller = $controllerProvider.register;
     // app.directive = $compileProvider.directive;
@@ -22,12 +17,12 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
     app.constant = $provide.constant;
     app.value = $provide.value;
 
-        // LAZY MODULES
-        $ocLazyLoadProvider.config({
-            debug: false,
-            events: true,
-            modules: jsRequires.modules
-        });
+    // LAZY MODULES
+    $ocLazyLoadProvider.config({
+        debug: false,
+        events: true,
+        modules: jsRequires.modules
+    });
 
         $urlRouterProvider.otherwise('/login');
 
@@ -82,6 +77,14 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
     $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache',
     
     $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+        var protocol = $location.protocol();
+        var host = $location.host();
+        var port = $location.port();
+        var APIURL = protocol+"://" + host +":" + port;
+        $authProvider.loginUrl = APIURL +"/consultas/auth/auth/login";
+        $authProvider.signupUrl = APIURL + "/consultas/auth/auth/logoutUser";
+        $authProvider.tokenName = "X_AUTH_TOKEN";
+        $authProvider.tokenPrefix = "";
         var config = $authProvider.SatellizerConfig;
         var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
         return {
@@ -106,7 +109,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
                     }
                      if(response.data.code === 3){     
                          alert("Token expired");
-                         $location.path('/login/signin');
+                         $location.path('/login');
                          return $q.reject(response);
                     }
                     
@@ -123,7 +126,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
                     alert("INTERNAL SERVER ERROR 500!!");
                 }
                  if (response.status === 401) {
-                    $location.path('/login/signin');
+                    $location.path('/login');
                     alert("UNAUTHORIZED 401!!");
                 }
                 return $q.reject(response);

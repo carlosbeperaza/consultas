@@ -7,11 +7,11 @@ app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$location', '$auth
         
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 //            event.preventDefault();
-            if ($auth.isAuthenticated() && toState && toState !== fromState) {
-                 $location.path(toState.name);
-            }else{
-                $location.path('/login'); 
-            } 
+//            if ($auth.isAuthenticated() && toState && toState !== fromState) {
+//                 $location.path(toState.url);
+//            }else{
+//                $location.path('/login'); 
+//            } 
         });
         $scope.logout = function (event) {
             if (window.confirm("logout?") === true) {
