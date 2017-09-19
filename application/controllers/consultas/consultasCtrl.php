@@ -55,7 +55,51 @@ class ConsultasCtrl extends CI_Controller {
     {
         $data['data'] = $this->Consultas_model->getDataClavePersona();
         echo json_encode($data);
-
+    }    
+    public function getProgramas()
+    {
+        $data['data'] = $this->Consultas_model->getProgramas();
+        echo json_encode($data);
+    }    
+    public function getIMC()
+    {
+        $data['data'] = $this->Consultas_model->getIMC();
+        echo json_encode($data);
+    }
+    public function getEdiTipoUno()
+    {
+        $data['data'] = $this->Consultas_model->getEdiTipoUno();
+        echo json_encode($data);
+    }
+    public function getEdiTipoDos()
+    {
+        $data['data'] = $this->Consultas_model->getEdiTipoDos();
+        echo json_encode($data);
+    }
+    public function getReferidoBy()
+    {
+        $data['data'] = $this->Consultas_model->getReferidoBy();
+        echo json_encode($data);
+    }
+    public function getResultBattelle()
+    {
+        $data['data'] = $this->Consultas_model->getResultBattelle();
+        echo json_encode($data);
+    }
+    public function getEdiTipoAll()
+    {
+        $data['data'] = $this->Consultas_model->getEdiTipoAll();
+        echo json_encode($data);
+    }
+    public function getComplicaciones()
+    {
+        $data['data'] = $this->Consultas_model->getComplicaciones();
+        echo json_encode($data);
+    }
+    public function getOtrasAcciones()
+    {
+        $data['data'] = $this->Consultas_model->getOtrasAcciones();
+        echo json_encode($data);
     }
           
 
