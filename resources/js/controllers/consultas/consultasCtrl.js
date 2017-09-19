@@ -30,6 +30,10 @@ app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService
             {id:'1', tipo:'HORMONAL'},
             {id:'2', tipo:'DIU'}            
         ];
+        $scope.apliCedulaCancer = [
+            {id:'1', tipo:'PRIMERA VEZ'},
+            {id:'2', tipo:'SEGUNDA VEZ'}            
+        ];
 
         consultasService.getTipoConsulta().then(function (response) {
             $scope.tipoConsultas = response.data;            
