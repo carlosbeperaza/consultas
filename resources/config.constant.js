@@ -22,7 +22,9 @@ app.constant('JS_REQUIRES', {
         'consultasService': 'resources/js/services/consultas/consultasService.js',
         'pacientesService': 'resources/js/services/pacientes/pacientesService.js',
         'reversoService': 'resources/js/services/consultas/reversoService.js',
-        'reversoCtrl': 'resources/js/controllers/consultas/reversoCtrl.js'
+        'reversoCtrl': 'resources/js/controllers/consultas/reversoCtrl.js',
+        
+        'sweetalert': 'resources/js/utils/sweetalert/sweetalert.js'
 
                 // 'itemCtrl': 'angular-app/controllers/ItemController.js',
                 // 'itemService': 'angular-app/services/myServices.js',        
