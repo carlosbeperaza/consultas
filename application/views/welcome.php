@@ -29,8 +29,10 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="<?php base_url()?>resources/js/angular.js"></script>
     <script src="<?php base_url()?>resources/js/angular-ui-router.min.js"></script>
+    <script src="<?php base_url()?>resources/js/components/angular-messages/angular-messages.js"></script>
     <script src="<?php base_url()?>resources/js/components/oclazyload/ocLazyLoad.min.js"></script>
     <script src="<?php base_url()?>resources/js/components/satellizer/satellizer.js"></script>
     <script src="<?php base_url()?>resources/js/components/ngstorage/ngStorage.min.js"></script>
@@ -58,7 +60,7 @@
 
 
     <!-- Javascript files-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
     <script src="<?php base_url()?>resources/js/tether.min.js"></script>
     <script src="<?php base_url()?>resources/js/bootstrap.min.js"></script>
     <script src="<?php base_url()?>resources/js/jquery.cookie.js"> </script>

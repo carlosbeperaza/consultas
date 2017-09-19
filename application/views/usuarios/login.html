@@ -1,30 +1,40 @@
-<div class="page login-page">
-    <div class="container" ng-controller="signinCtrl">
-        <div class="form-outer text-center align-items-center">
+<div class="page login-page" ng-controller="signinCtrl">
+    <div class="container">
+        <div class="form-outer text-center d-flex align-items-center">
             <div class="form-inner">
                 <div class="logo text-uppercase">
                     <span>Consultas</span><strong class="text-primary">Externas</strong>
                 </div>
-                <!--<p>Lorem ipsum.</p>-->
-                <form id="login-form" ng-submit="login()" method="post">
-                    <div class="form-group">
-                        <label for="login-username" class="label-custom"></label>
-                        <input placeholder="User" id="login-username" ng-model="user.email" type="email" name="loginUsername" required>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                <form id="login-form" name="login_form" novalidate ng-submit="form.submit(login_form)" method="post" required>
+
+                   <div class="form-group" ng-class="{'has-error':login_form.email.$dirty && login_form.email.$invalid, 'has-success':login_form.email.$valid}">
+                       <!--<label for="login-username" class="label-custom">User Name</label>-->
+                       <input type="email" id="login-username" placeholder="Enter a valid E-mail" class="form-control" name="email" ng-model="user.email" required>
+                        <span class="help-block text-small block" ng-if="login_form.email.$dirty && login_form.email.$error.required">Email is required.</span>
+                        <span class="error text-small block" ng-if="login_form.email.$error.email">Please, enter a valid email address.</span>                        
+                  </div>
+                    <div class="form-group" ng-class="{'has-error':login_form.Password.$dirty && login_form.Password.$invalid, 'has-success':login_form.Password.$valid}">                        
+                        <!--<label for="login-password" class="label-custom">Password</label>-->
+                        <input placeholder="Password" id="login-password" type="password" name="Password" 
+                               ng-model="user.password" ng-minlength="5" required> 
+                        <span class="error text-small block" ng-if="login_form.Password.$error.minlength">Password too short!</span>
                     </div>
-                    <div class="form-group">                        
-                        <input placeholder="Password" id="login-password" type="password" name="loginPassword" ng-model="user.password" required>
-                    </div>
                     <div class="form-group">
-                        <button id="login" type="submit"  class="btn btn-primary pull-right">                            
-                            <span>Login</span><i class="fa fa-arrow-circle-right"></i>
+                        <button id="login" type="submit"  class="btn btn-primary">                           
+                            <span>Login</span>
                         </button>
                     </div>
             
                 </form>
                 <a href="#" class="forgot-pass">Forgot Password?</a>
                     <small>Do not have an account? </small>
-                   <a ui-sref="register" class="signup">Signup</a>
+                <a ui-sref="register" class="signup">Signup</a>
             </div>
+            <div class="copyrights text-center">
+            <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
+            <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+          </div>
         </div>
     </div>
 </div>    
