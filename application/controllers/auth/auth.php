@@ -4,9 +4,8 @@ class Auth extends CI_Controller
 {
      public function __construct() {
 
-        parent::__construct();
-        $this->load->database();   
-        	
+        parent::__construct();             
+        $this->load->model('login/Login_model', 'auth_model');	
     }
     function hasAllProperties($object, array $properties) {
     return array_reduce(
@@ -28,7 +27,7 @@ class Auth extends CI_Controller
         if (!$empty) {
             if (array_key_exists("email",$requestArr) && array_key_exists("password",$requestArr)){            
                 $email = $request->email; $password = $request->password;
-                $this->load->model('login/Login_model', 'auth_model');
+               
                 $userData = $this->auth_model->login($email, $password);
                 if ($userData !== FALSE) {
                     $temp = array("id_usuario" => $userData->id_usuario, "email" => $userData->email);
