@@ -45,7 +45,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>No. Afiliación</label>
-                                            <input ng-model="consulta['noAfiliacion']" ng-model="consulta.numberAfiliacion" ng-keypress="($event.charCode == 13)?buscarUsuarioByAfiliacion():return" type="text" placeholder="No. Afiliación" class="form-control form-control-sm">
+                                            <input ng-model="consulta['noAfiliacion']" ng-keypress="($event.charCode == 13)?buscarUsuarioByAfiliacion():return" type="text" placeholder="No. Afiliación" class="form-control form-control-sm">
                                         </div>
                                         <div class="form-group">
                                             <label>Nombre(s)</label>
@@ -72,7 +72,7 @@
                                             <label>Relación Temporal</label>                                    
                                             <div class="select">
                                                 <select ng-model="consulta['rtPaciente']" class="form-control form-control-sm"                                                
-                                                    ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                        ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
                                                     <option selected disabled hidden></option>
                                                 </select>                                                
                                             </div>
@@ -95,8 +95,8 @@
                                         <div class="form-group">
                                             <label>Clave de Edad</label>
                                             <div class="select">
-                                                 <select ng-model="consulta['claveEdadPaciente']" class="form-control form-control-sm" 
-                                                ng-options="cep.id_clave as cep.nombre for cep in dataClavePersona">
+                                                <select ng-model="consulta['claveEdadPaciente']" class="form-control form-control-sm" 
+                                                        ng-options="cep.id_clave as cep.nombre for cep in dataClavePersona">
                                                     <option selected disabled hidden></option>
                                                 </select>
                                             </div>
@@ -107,7 +107,7 @@
                                             <label>Derechohabiencia</label>
                                             <div class="select">
                                                 <select ng-model="consulta['derechohabiencia']" class="form-control form-control-sm" 
-                                                ng-options="drcho.id_derechohabiencias as drcho.tipo_derechohabiencias for drcho in dataDerechohabiencia">
+                                                        ng-options="drcho.id_derechohabiencias as drcho.tipo_derechohabiencias for drcho in dataDerechohabiencia">
                                                     <option selected disabled hidden></option>
                                                 </select>
                                             </div>
@@ -116,7 +116,7 @@
                                             <label>Discapacidad</label>
                                             <div class="select">
                                                 <select ng-model="consulta['discapacidad']" class="form-control form-control-sm" 
-                                                ng-options="disca.id_discapacidad as disca.tipo_discapacidad for disca in dataDiscapacidad">
+                                                        ng-options="disca.id_discapacidad as disca.tipo_discapacidad for disca in dataDiscapacidad">
                                                     <option selected disabled hidden></option>
                                                 </select>
                                             </div>
@@ -158,560 +158,481 @@
                             </div>                        
                         </div>
                     </div>
-                </div> 
-                <div class="col-lg-6">               
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h2 class="h5 display display">Diagnóstico</h2>
-                        </div>
-                        <div class="card-block"> 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Diagnóstico del Paciente</label>
-                                        <textarea class="form-control" rows="5"></textarea>                                        
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tipo de Consulta</label>
-                                        <select name="tipoConsultas" ng-change="changeTipoConsulta()" ng-model="tipoConsulta" class="form-control form-control-sm">
-                                            <option selected disabled hidden></option>
-                                            <option value="0">NINGUNO</option>                                                
-                                            <option ng-repeat="tipo in tipoConsultas" ng-selected="tipoConsulta == tipo.id_tipo_consulta" value="{{tipo.id_tipo_consulta}}">{{tipo.nombre}}</option>
-                                            <option value="10">AMBOS</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h2 class="h5 display display">Cobertura</h2>
-                        </div>
-                        <div class="card-block"> 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">                                        
-                                        <label>Programa Según Motivo</label>                                    
-                                        <div class="select">
-                                            <select name="rt" class="form-control form-control-sm">
-                                                <option>option 1</option>
-                                                <option>option 2</option>
-                                                <option>option 3</option>
-                                                <option>option 4</option>
+                    <div class="col-lg-6">               
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center">
+                                <h2 class="h5 display display">Diagnóstico</h2>
+                            </div>
+                            <div class="card-block"> 
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Diagnóstico del Paciente</label>
+                                            <textarea ng-model="consulta['diagnosticoPaciente']" class="form-control" rows="5"></textarea>                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tipo de Consulta</label>
+                                            <select name="tipoConsultas" ng-change="changeTipoConsulta()" ng-model="consulta['tipoConsulta']" class="form-control form-control-sm">
+                                                <option selected disabled hidden></option>
+                                                <option value="0">NINGUNO</option>                                                
+                                                <option ng-repeat="tipo in tipoConsultas" ng-selected="tipoConsulta == tipo.id_tipo_consulta" value="{{tipo.id_tipo_consulta}}">{{tipo.nombre}}</option>
+                                                <option value="10">AMBOS</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">                                       
-                                        <label>IMC</label>                                    
-                                        <div class="select">
-                                            <select name="rt" class="form-control form-control-sm">
-                                                <option>option 1</option>
-                                                <option>option 2</option>
-                                                <option>option 3</option>
-                                                <option>option 4</option>
-                                            </select>
-                                        </div>
-                                    </div>                                    
-                                    <div class="form-group">
-                                        <label></label>                                           
-                                        <div class="i-checks">
-                                            <input ng-model="consulta[field.model]" id="checkboxCustom6" type="checkbox" value="" class="form-control-custom">
-                                            <label for="checkboxCustom6">Primera vez en el año</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">                                        
-                                        <div class="i-checks">
-                                            <input ng-model="consulta[field.model]" id="checkboxCustom7" type="checkbox" value="" class="form-control-custom">
-                                            <label for="checkboxCustom7">Sint. Respiratorio TB</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                        
+                                </div>                        
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-12" ng-hide="disabledReproductiva">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h2 class="h5 display display">Salud Productiva</h2>
-                        </div>
-                        <div class="card-block"> 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header d-flex align-items-center">
-                                            <h2 class="h5 display display">Embarazo</h2>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center">
+                                <h2 class="h5 display display">Cobertura</h2>
+                            </div>
+                            <div class="card-block"> 
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">                                        
+                                            <label>Programa Según Motivo</label>
+                                            <div class="select">
+                                                <select ng-model="consulta['programaMotivo']" class="form-control form-control-sm"                                                
+                                                        ng-options="progama.id_programa as progama.tipo_programa for progama in dataProgramas">
+                                                    <option selected disabled hidden></option>
+                                                </select>                                                
+                                            </div>                                            
                                         </div>
-                                        <div class="card-block"> 
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Relación Temporal</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Trimestre Gestacional</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label></label>                                           
-                                                        <div class="i-checks">
-                                                            <input ng-model="consulta[field.model]" id="checkboxCustom10" type="checkbox" value="" class="form-control-custom">
-                                                            <label for="checkboxCustom10">Alto Riesgo Primera Vez</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Complicaciones</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Otras Acciones</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>                                                    
-                                                </div>
-                                            </div>                        
+                                        <div class="form-group">                                       
+                                            <label>IMC</label>
+                                            <div class="select">
+                                                <select ng-model="consulta['tipoImc']" class="form-control form-control-sm"                                                
+                                                        ng-options="IMC.id_imc as IMC.imc for IMC in dataIMC">
+                                                    <option selected disabled hidden></option>
+                                                </select>                                                
+                                            </div>                                            
+                                        </div>                                    
+                                        <div class="form-group">
+                                            <label></label>                                           
+                                            <div class="i-checks">
+                                                <input ng-model="consulta['primeraVezAnio']" id="checkboxCustom6" type="checkbox" value="" class="form-control-custom">
+                                                <label for="checkboxCustom6">Primera vez en el año</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">                                        
+                                            <div class="i-checks">
+                                                <input ng-model="consulta['sintRepiratorio']" id="checkboxCustom7" type="checkbox" value="" class="form-control-custom">
+                                                <label for="checkboxCustom7">Sint. Respiratorio TB</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header d-flex align-items-center">
-                                            <h2 class="h5 display display">Puerperio</h2>
-                                        </div>
-                                        <div class="card-block"> 
-                                            <div class="row">
-                                                <div class="col-lg-6">                                                    
-                                                    <div class="form-group">
-                                                        <label>RT por Perperio</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Aceptante de PF</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label></label>                                           
-                                                        <div class="i-checks">
-                                                            <input ng-model="consulta[field.model]" id="checkboxCustom11" type="checkbox" value="" class="form-control-custom">
-                                                            <label for="checkboxCustom11">Terapia Hormonal (Menopausia)</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>RT por infección Puerperal</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Trimestre Gestacional</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>                                                    
-                                                </div>
-                                            </div>                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                        
+                                </div>                        
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-12" ng-hide="disabledNinio">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h2 class="h5 display display">Salud del Niño</h2>
-                        </div>
-                        <div class="card-block"> 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="card">                                        
-                                        <div class="card-block"> 
-                                            <div class="row">
-
-                                                <div class="col-lg-6">                                                    
-                                                    <div class="form-group">
-                                                        <label>Niño Sano</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
+                    <div class="col-lg-12" ng-hide="disabledReproductiva">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center">
+                                <h2 class="h5 display display">Salud Productiva</h2>
+                            </div>
+                            <div class="card-block"> 
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header d-flex align-items-center">
+                                                <h2 class="h5 display display">Embarazo</h2>
+                                            </div>
+                                            <div class="card-block"> 
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Relación Temporal</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['embarazoRT']" class="form-control form-control-sm"                                                
+                                                                        ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Trimestre Gestacional</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['trimeGestacional']" class="form-control form-control-sm"                                                
+                                                                        ng-options="triGest.id as triGest.tipo for triGest in trimeGestacional">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label></label>                                           
+                                                            <div class="i-checks">
+                                                                <input ng-model="consulta['altoRiesgoEmba']" id="checkboxCustom10" type="checkbox" value="" class="form-control-custom">
+                                                                <label for="checkboxCustom10">Alto Riesgo Primera Vez</label>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>IMC</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Complicaciones</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['complicacionEmba']" class="form-control form-control-sm"                                                
+                                                                        ng-options="compli.id_complicacion as compli.complicacion for compli in dataComplicaciones">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label>Otras Acciones</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['otraAccionEmba']" class="form-control form-control-sm"                                                
+                                                                        ng-options="acciones.id_embara_accion as acciones.accion for acciones in dataOtrasAcciones">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>                                                    
                                                     </div>
-                                                    <div class="form-group">                                        
-                                                        <div class="i-checks">
-                                                            <input ng-model="consulta[field.model]" id="checkboxCustom12" type="checkbox" value="" class="form-control-custom">
-                                                            <label for="checkboxCustom12">Confirmación de Cáncer</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">                                        
-                                                        <div class="i-checks">
-                                                            <input ng-model="consulta[field.model]" id="checkboxCustom13" type="checkbox" value="" class="form-control-custom">
-                                                            <label for="checkboxCustom13">Madre Informada</label>
-                                                        </div>
-                                                    </div>                                                    
-                                                </div>                                                
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Result. Battelle (16m - 4a)</label>
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Aplicación Cédula Cáncer</label>
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>                                                    
-                                                </div>
-                                            </div>                        
-                                        </div>
-                                    </div>                                    
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header d-flex align-items-center">
-                                            <h2 class="h5 display display">Prueba EDI < 5 años</h2>
-                                        </div>
-                                        <div class="card-block"> 
-                                            <div class="row">
-                                                <div class="col-lg-12">                                                    
-                                                    <div class="form-group">
-                                                        <label>Tipo</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Resultado</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>                                                
-                                            </div>                        
+                                                </div>                        
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header d-flex align-items-center">
-                                            <h2 class="h5 display display">EDA's</h2>
-                                        </div>
-                                        <div class="card-block"> 
-                                            <div class="row">
-                                                <div class="col-lg-6">                                                    
-                                                    <div class="form-group">
-                                                        <label>Relación Temporal</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header d-flex align-items-center">
+                                                <h2 class="h5 display display">Puerperio</h2>
+                                            </div>
+                                            <div class="card-block"> 
+                                                <div class="row">
+                                                    <div class="col-lg-6">                                                    
+                                                        <div class="form-group">
+                                                            <label>RT por Perperio</label>                                    
+                                                            <select ng-model="consulta['puerperioRT']" class="form-control form-control-sm"                                                
+                                                                    ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                <option selected disabled hidden></option>
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Plan de Tratamiento</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
+                                                        <div class="form-group">
+                                                            <label>Aceptante de PF</label>                                    
+                                                            <select ng-model="consulta['aceptantePuerperio']" class="form-control form-control-sm"                                                
+                                                                    ng-options="acepPuerp.id as acepPuerp.tipo for acepPuerp in aceptantePuerperio">
+                                                                <option selected disabled hidden></option>
                                                             </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label></label>
-                                                        <div class="i-checks">
-                                                            <input ng-model="consulta[field.model]" id="checkboxCustom14" type="checkbox" value="" class="form-control-custom">
-                                                            <label for="checkboxCustom14">Recuperado</label>
                                                         </div>                                                        
-                                                    </div>                                                    
-                                                </div> 
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>No. de Sobres VSO Tratamiento</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>1</option>
-                                                                <option>3</option>
-                                                                <option>5</option>
-                                                                <option>10</option>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>RT por infección Puerperal</label>                                    
+                                                            <select ng-model="consulta['infeccionPuerpRT']" class="form-control form-control-sm"                                                
+                                                                    ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                <option selected disabled hidden></option>
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>No. de Sobres VSO Promoción</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>1</option>
-                                                                <option>3</option>
-                                                                <option>5</option>
-                                                                <option>10</option>
-                                                            </select>
+                                                        <div class="form-group">
+                                                            <label></label>                                           
+                                                            <div class="i-checks">
+                                                                <input ng-model="consulta['terapiaHormonal']" id="checkboxCustom11" type="checkbox" value="" class="form-control-custom">
+                                                                <label for="checkboxCustom11">Terapia Hormonal (Menopausia)</label>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>                        
+                                                </div>                        
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header d-flex align-items-center">
-                                            <h2 class="h5 display display">IRA's</h2>
-                                        </div>
-                                        <div class="card-block"> 
-                                            <div class="row">
-                                                <div class="col-lg-12">                                                    
-                                                    <div class="form-group">
-                                                        <label>Relación Temporal</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Tipo de Tratamiento</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Neumonía</label>                                    
-                                                        <div class="select">
-                                                            <select name="rt" class="form-control form-control-sm">
-                                                                <option>option 1</option>
-                                                                <option>option 2</option>
-                                                                <option>option 3</option>
-                                                                <option>option 4</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>                                                
-                                            </div>                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                        
+                                </div>                        
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h2 class="h5 display display">Otros Eventos</h2>
+                    <div class="col-lg-12" ng-hide="disabledNinio">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center">
+                                <h2 class="h5 display display">Salud del Niño</h2>
+                            </div>
+                            <div class="card-block"> 
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card">                                        
+                                            <div class="card-block"> 
+                                                <div class="row">
+                                                    <div class="col-lg-6">                                                    
+                                                        <div class="form-group">
+                                                            <label>Niño Sano</label>                                    
+                                                            <select ng-model="consulta['ninoSanoRT']" class="form-control form-control-sm"                                                
+                                                                    ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                <option selected disabled hidden></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>IMC</label>                                    
+                                                            <select ng-model="consulta['tipoImcNino']" class="form-control form-control-sm"                                                
+                                                                    ng-options="IMC.id_imc as IMC.imc for IMC in dataIMC">
+                                                                <option selected disabled hidden></option>
+                                                            </select> 
+                                                        </div>
+                                                        <div class="form-group">                                        
+                                                            <div class="i-checks">
+                                                                <input ng-model="consulta['cancerConfirm']" id="checkboxCustom12" type="checkbox" value="" class="form-control-custom">
+                                                                <label for="checkboxCustom12">Confirmación de Cáncer</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">                                        
+                                                            <div class="i-checks">
+                                                                <input ng-model="consulta['madreInfo']" id="checkboxCustom13" type="checkbox" value="" class="form-control-custom">
+                                                                <label for="checkboxCustom13">Madre Informada</label>
+                                                            </div>
+                                                        </div>                                                    
+                                                    </div>                                                
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Result. Battelle (16m - 4a)</label>
+                                                            <div class="select">
+                                                                <select ng-model="consulta['resultBattelle']" class="form-control form-control-sm"                                                
+                                                                        ng-options="battelle.id_battelle as battelle.rest_battelle for battelle in dataResultBattelle">
+                                                                    <option selected disabled hidden></option>
+                                                                </select> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Aplicación Cédula Cáncer</label>
+                                                            <div class="select">
+                                                                <select ng-model="consulta['apliCedulaCancer']" class="form-control form-control-sm"                                                
+                                                                        ng-options="IMC.id_imc as IMC.imc for IMC in dataIMC">
+                                                                    <option selected disabled hidden></option>
+                                                                </select> 
+                                                            </div>
+                                                        </div>                                                    
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header d-flex align-items-center">
+                                                <h2 class="h5 display display">Prueba EDI < 5 años</h2>
+                                            </div>
+                                            <div class="card-block"> 
+                                                <div class="row">
+                                                    <div class="col-lg-12">                                                    
+                                                        <div class="form-group">
+                                                            <label>Tipo</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['tipoEdiRT']" class="form-control form-control-sm"                                                
+                                                                        ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Resultado</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['resultEDI']" class="form-control form-control-sm"                                                
+                                                                        ng-options="ediTipo.id_edi as ediTipo.edi_tipo for ediTipo in dataEdiTipoAll">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header d-flex align-items-center">
+                                                <h2 class="h5 display display">EDA's</h2>
+                                            </div>
+                                            <div class="card-block"> 
+                                                <div class="row">
+                                                    <div class="col-lg-6">                                                    
+                                                        <div class="form-group">
+                                                            <label>Relación Temporal</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['edaRT']" class="form-control form-control-sm"                                                
+                                                                        ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Plan de Tratamiento</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['planTratamientoEDA']" class="form-control form-control-sm"                                                
+                                                                        ng-options="pTrataEDA.id as pTrataEDA.tipo for pTrataEDA in planTratamientos">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label></label>
+                                                            <div class="i-checks">
+                                                                <input ng-model="consulta['recuperadoEDA']" id="checkboxCustom14" type="checkbox" value="" class="form-control-custom">
+                                                                <label for="checkboxCustom14">Recuperado</label>
+                                                            </div>                                                        
+                                                        </div>                                                    
+                                                    </div> 
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>No. de Sobres VSO Tratamiento</label>                                                            
+                                                            <div class="select">
+                                                                <select ng-model="consulta['noSobresEDAtrata']" class="form-control form-control-sm"                                                
+                                                                        ng-options="noSobres.id as noSobres.cantidad for noSobres in noSobres">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>No. de Sobres VSO Promoción</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['noSobresEDAPromo']" class="form-control form-control-sm"                                                
+                                                                        ng-options="noSobres.id as noSobres.cantidad for noSobres in noSobres">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header d-flex align-items-center">
+                                                <h2 class="h5 display display">IRA's</h2>
+                                            </div>
+                                            <div class="card-block"> 
+                                                <div class="row">
+                                                    <div class="col-lg-12">                                                    
+                                                        <div class="form-group">
+                                                            <label>Relación Temporal</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['tipoIraRT']" class="form-control form-control-sm"                                                
+                                                                        ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Tipo de Tratamiento</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['tipoTratamientoIRA']" class="form-control form-control-sm"                                                
+                                                                        ng-options="tipoTrataIRA.id as tipoTrataIRA.tipo for tipoTrataIRA in tipoTratamientoIRA">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Neumonía</label>                                    
+                                                            <div class="select">
+                                                                <select ng-model="consulta['neumoniaIRA']" class="form-control form-control-sm"                                                
+                                                                        ng-options="rt.id_rt as rt.tipo_rt for rt in dataRelacionTemporal">
+                                                                    <option selected disabled hidden></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                        
+                            </div>
                         </div>
-                        <div class="card-block"> 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">                                       
-                                        <label>Primera Vez</label>                                    
-                                        <div class="select">
-                                            <select name="rt" class="form-control form-control-sm">
-                                                <option>option 1</option>
-                                                <option>option 2</option>
-                                                <option>option 3</option>
-                                                <option>option 4</option>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center">
+                                <h2 class="h5 display display">Otros Eventos</h2>
+                            </div>
+                            <div class="card-block"> 
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">                                       
+                                            <label>Primera Vez</label>
+                                            <select ng-model="consulta['ediTipoUno']" class="form-control form-control-sm"                                                
+                                                    ng-options="ediUno.id_edi as ediUno.edi_tipo for ediUno in dataEdiTipoUno">
+                                                <option selected disabled hidden></option>
+                                            </select>                                            
+                                        </div>
+                                        <div class="form-group">                                       
+                                            <label>Subsecuente</label>
+                                            <select ng-model="consulta['ediTipoDos']" class="form-control form-control-sm"                                                
+                                                    ng-options="ediDos.id_edi as ediDos.edi_tipo for ediDos in dataEdiTipoDos">
+                                                <option selected disabled hidden></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">                                       
+                                            <label>Rereferido Por:</label>                                    
+                                            <select ng-model="consulta['referidoPor']" class="form-control form-control-sm"                                                
+                                                    ng-options="referido.id_referido as referido.referido for referido in dataReferidoBy">
+                                                <option selected disabled hidden></option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">                                       
-                                        <label>Subsecuente</label>                                    
-                                        <div class="select">
-                                            <select name="rt" class="form-control form-control-sm">
-                                                <option>option 1</option>
-                                                <option>option 2</option>
-                                                <option>option 3</option>
-                                                <option>option 4</option>
-                                            </select>
+                                    <div class="col-lg-6">                                    
+                                        <div class="form-group">
+                                            <label></label>                                           
+                                            <div class="i-checks">
+                                                <input ng-model="consulta['contrareferido']" id="checkboxCustom20" type="checkbox" value="" class="form-control-custom">
+                                                <label for="checkboxCustom20">Contrareferido</label>
+                                            </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label></label>                                           
+                                            <div class="i-checks">
+                                                <input ng-model="consulta['unidadConsultante']" id="checkboxCustom15" type="checkbox" value="" class="form-control-custom">
+                                                <label for="checkboxCustom15">Unidad Consultante TM</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label></label>                                           
+                                            <div class="i-checks">
+                                                <input ng-model="consulta['controlSeguimiento']" id="checkboxCustom16" type="checkbox" value="" class="form-control-custom">
+                                                <label for="checkboxCustom16">En control y Seguimiento</label>
+                                            </div>
+                                        </div>                                    
                                     </div>
-                                    <div class="form-group">                                       
-                                        <label>Rereferido Por:</label>                                    
-                                        <div class="select">
-                                            <select name="rt" class="form-control form-control-sm">
-                                                <option>option 1</option>
-                                                <option>option 2</option>
-                                                <option>option 3</option>
-                                                <option>option 4</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">                                    
-                                    <div class="form-group">
-                                        <label></label>                                           
-                                        <div class="i-checks">
-                                            <input ng-model="consulta[field.model]" id="checkboxCustom20" type="checkbox" value="" class="form-control-custom">
-                                            <label for="checkboxCustom20">Contrareferido</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label></label>                                           
-                                        <div class="i-checks">
-                                            <input ng-model="consulta[field.model]" id="checkboxCustom15" type="checkbox" value="" class="form-control-custom">
-                                            <label for="checkboxCustom15">Unidad Consultante TM</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label></label>                                           
-                                        <div class="i-checks">
-                                            <input ng-model="consulta[field.model]" id="checkboxCustom16" type="checkbox" value="" class="form-control-custom">
-                                            <label for="checkboxCustom16">En control y Seguimiento</label>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                            </div>                        
+                                </div>                        
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h2 class="h5 display display">Promoción de la Salud</h2>
-                        </div>
-                        <div class="card-block"> 
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label></label>                                           
-                                        <div class="i-checks">
-                                            <input ng-model="consulta[field.model]" id="checkboxCustom17" type="checkbox" value="" class="form-control-custom">
-                                            <label for="checkboxCustom17">Consulta Integrada Linea de Vida</label>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center">
+                                <h2 class="h5 display display">Promoción de la Salud</h2>
+                            </div>
+                            <div class="card-block"> 
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label></label>                                           
+                                            <div class="i-checks">
+                                                <input ng-model="consulta['lineaDeVida']" id="checkboxCustom17" type="checkbox" class="form-control-custom">
+                                                <label for="checkboxCustom17">Consulta Integrada Linea de Vida</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">                                    
-                                    <div class="form-group">
-                                        <label></label>                                           
-                                        <div class="i-checks">
-                                            <input ng-model="consulta[field.model]" id="checkboxCustom18" type="checkbox" value="" class="form-control-custom">
-                                            <label for="checkboxCustom18">Presenta Cartilla</label>
-                                        </div>
-                                    </div>                                                                     
-                                </div>
-                            </div>                        
+                                    <div class="col-lg-6">                                    
+                                        <div class="form-group">
+                                            <label></label>                                           
+                                            <div class="i-checks">
+                                                <input ng-model="consulta['presentaCartilla']" id="checkboxCustom18" type="checkbox" class="form-control-custom">
+                                                <label for="checkboxCustom18">Presenta Cartilla</label>
+                                            </div>
+                                        </div>                                                                     
+                                    </div>
+                                </div>                        
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="line"></div>
-                <div class="col-lg-12">
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <button class="btn btn-secondary">Cancelar</button>
-                            <button ng-click="saveConsulta()" class="btn btn-primary">Guardar</button>
+                    <div class="line"></div>
+                    <div class="col-lg-12">
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <button ng-click="clear()" class="btn btn-secondary">Cancelar</button>
+                                <button ng-click="saveConsulta()" class="btn btn-primary">Guardar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
+                </div>                
+            </form>
+        </div>
+    </section>
 </div>
