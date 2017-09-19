@@ -40,6 +40,13 @@
     <!-- <script src="angular-app/services/myServices.js"></script> -->
     <script src="<?php base_url()?>resources/config.router.js"></script>    
     <script src="<?php base_url()?>resources/js/controllers/mainCtrl.js"></script>
+    
+    <!--SWEETALAERT-->
+    <script src="<?php base_url()?>resources/js/components/sweetalert/sweetalert.js"></script>
+    <script src="<?php base_url()?>resources/js/components/sweetalert/sweetalert.css"></script>
+    <!--CSSPING-->
+    <script src="<?php base_url()?>resources/js/components/csspin/csspin.css"></script>
+    
 </head>
 
 <!-- apply our angular app to our site -->

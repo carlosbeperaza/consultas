@@ -1,11 +1,13 @@
-app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService',
-    function ($scope, consultasService, pacientesService) {
+app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService', 'sweetalert',
+    function ($scope, consultasService, pacientesService, sweetalert) {
 
         $scope.tipoConsultas = {};
         $scope.paciente = {};
         $scope.disabledNinio = true;
         $scope.disabledReproductiva = true;
         $scope.consulta = {};
+        
+        sweetalert.loadingAlert();
         
         $scope.planTratamientos = [
             {id:'A', tipo:'A'},

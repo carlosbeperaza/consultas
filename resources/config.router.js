@@ -49,7 +49,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         .state('app.dashboard', {
             url: '/dashboard',
             templateUrl: 'dashboard/DashboardCtrl',
-            resolve: loadSequence('dashboardCtrl','dashboardService')
+            resolve: loadSequence('dashboardCtrl','dashboardService', 'sweetalert')
         })
         .state('app.forms', {
             url: '/forms',
