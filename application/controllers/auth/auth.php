@@ -29,11 +29,9 @@ class Auth extends CI_Controller
             $user->iat = time();
             $user->exp = time() + 300;
             $jwt = JWT\jwt_helper::encode($user, 'M3g@AL13nH@sH');
-            echo \json_encode(array("code" => 0,"X_AUTH_TOKEN" => $jwt,"msg" => "authorized","userInfo"=>$userInfo));
-//          echo \json_encode(array("code" => 0,"response" => array("X_AUTH_TOKEN" => $jwt)));                            
+            echo \json_encode(array("code" => 0,"X_AUTH_TOKEN" => $jwt,"msg" => "authorized","userInfo"=>$userInfo));                  
            }else{
-               echo \json_encode(array("code" => 1,"X_AUTH_TOKEN" => "","status"=>"UNAUTHORIZED"));
-//                echo json_encode(array("code" => 1,"status"=>"UNAUTHORIZED","response" => "Failed"));  
+               echo \json_encode(array("code" => 1,"X_AUTH_TOKEN" => "","status"=>"UNAUTHORIZED")); 
            }
       
         
