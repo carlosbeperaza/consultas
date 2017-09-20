@@ -1,8 +1,8 @@
 'use strict';
 
 // signin controller
-app.controller('signinCtrl', ["$scope","$rootScope",'$state', "$location",'$auth',
-    function ($scope,$rootScope,$state, $location,$auth) {
+app.controller('signinCtrl', ["$scope","$rootScope",'$state','$auth','$localStorage',
+    function ($scope,$rootScope,$state,$auth,$localStorage) {
 
         $scope.user = {};
         $scope.authError = null;        
@@ -11,6 +11,7 @@ app.controller('signinCtrl', ["$scope","$rootScope",'$state', "$location",'$auth
                 email: $scope.user.email,
                 password: $scope.user.password
             }).then(function (response) {
+                $localStorage.userInfo=response.data.userInfo;
                 $rootScope.userInfo=response.data.userInfo;
                 $auth.setToken(response.data.X_AUTH_TOKEN);
                 $state.go('app.dashboard');  

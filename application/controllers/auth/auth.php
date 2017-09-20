@@ -7,27 +7,14 @@ class Auth extends CI_Controller
         parent::__construct();             
         $this->load->model('login/Login_model', 'auth_model');	
     }
-    function hasAllProperties($object, array $properties) {
-    return array_reduce(
-        $properties,
-        function ($acc, $property) use ($object) {
-            return $acc && property_exists($object, $property);
-        },
-        true
-    );
-    }
-
-
-       //logueamos usuarios con codeigniter y angularjs
+    
+     //logueamos usuarios con codeigniter y angularjs
     public function login(){       
         $request = json_decode(file_get_contents("php://input"));
-        // Convert to array
         $requestArr = (array)$request;
-        $empty = empty($requestArr);
-        if (!$empty) {
+        if (!empty($requestArr)) {
             if (array_key_exists("email",$requestArr) && array_key_exists("password",$requestArr)){            
-                $email = $request->email; $password = $request->password;
-               
+                $email = $request->email; $password = $request->password;               
                 $userData = $this->auth_model->login($email, $password);
                 if ($userData !== FALSE) {
                     $temp = array("id_usuario" => $userData->id_usuario, "email" => $userData->email);

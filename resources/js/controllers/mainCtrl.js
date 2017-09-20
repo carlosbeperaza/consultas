@@ -2,8 +2,8 @@
 /**
  * Clip-Two Main Controller
  */
-app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$location', '$auth', '$http',
-    function ($rootScope, $scope, $state, $location, $auth, $http) {        
+app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$location', '$auth', '$http','$localStorage',
+    function ($rootScope, $scope, $state, $location, $auth, $http,$localStorage) {        
 
         $scope.logout = function (event) {
             if (window.confirm("logout?") === true) {
@@ -12,6 +12,14 @@ app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$location', '$auth
                 $location.path('/login');  
             } 
         };
+        if($rootScope.userInfo){
+            if(Object.keys($rootScope.userInfo).length === 0){
+                $rootScope.userInfo = $localStorage.userInfo;    
+            };
+        }else{
+            $rootScope.userInfo = $localStorage.userInfo;
+        }
+        
 //         if ($auth.isAuthenticated() && toState && toState !== fromState) {
 
         
@@ -37,5 +45,7 @@ app.run(function ($rootScope, $location,$auth) {
         $location.path('/login');
       }
     });
+    
+        
 });
 
