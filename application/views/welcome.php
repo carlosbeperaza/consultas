@@ -43,11 +43,14 @@
     <script src="<?php base_url()?>resources/config.router.js"></script>    
     <script src="<?php base_url()?>resources/js/controllers/mainCtrl.js"></script>
     
-    <!--SWEETALAERT-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>
+    
+<!--    SWEETALAERT
     <script src="<?php base_url()?>resources/js/components/sweetalert/sweetalert.js"></script>
-    <script src="<?php base_url()?>resources/js/components/sweetalert/sweetalert.css"></script>
+    <script src="<?php base_url()?>resources/js/components/sweetalert/sweetalert.css"></script>-->
     <!--CSSPING-->
-    <script src="<?php base_url()?>resources/js/components/csspin/csspin.css"></script>
+    <!--<script src="<?php base_url()?>resources/js/components/csspin/csspin.css"></script>-->
     
 </head>
 

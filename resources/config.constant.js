@@ -23,6 +23,7 @@ app.constant('JS_REQUIRES', {
         'pacientesService': 'resources/js/services/pacientes/pacientesService.js',
         'reversoService': 'resources/js/services/consultas/reversoService.js',
         'reversoCtrl': 'resources/js/controllers/consultas/reversoCtrl.js',
+        'usuariosService': 'resources/js/services/usuarios/usuariosService.js',
         
         'sweetalert': 'resources/js/utils/sweetalert/sweetalert.js'
 

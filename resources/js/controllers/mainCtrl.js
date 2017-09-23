@@ -2,16 +2,35 @@
 /**
  * Clip-Two Main Controller
  */
-app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$location', '$auth', '$http',
-    function ($rootScope, $scope, $state, $location, $auth, $http) {        
+app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$location', '$auth', '$http','$localStorage',
+    function ($rootScope, $scope, $state, $location, $auth, $http,$localStorage) {        
 
         $scope.logout = function (event) {
-            if (window.confirm("logout?") === true) {
+            swal({
+                title: "¡Cerrar Sesión!",
+                text: "¿Estas seguro que deseas cerrar tu sesión?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: '#d33',
+                cancelButtonText: "No",
+                confirmButtonText: "Si"
+            }).then(function () {
                 $auth.removeToken();
                 $auth.logout();
                 $location.path('/login');  
-            } 
+            });     
+
         };
+
+        if($rootScope.userInfo){
+            if(Object.keys($rootScope.userInfo).length === 0){
+                $rootScope.userInfo = $localStorage.userInfo;    
+            };
+        }else{
+            $rootScope.userInfo = $localStorage.userInfo;
+        }
+        
 //         if ($auth.isAuthenticated() && toState && toState !== fromState) {
 
         
@@ -37,5 +56,7 @@ app.run(function ($rootScope, $location,$auth) {
         $location.path('/login');
       }
     });
+    
+        
 });
 

@@ -4,31 +4,17 @@ class Auth extends CI_Controller
 {
      public function __construct() {
 
-        parent::__construct();
-        $this->load->database();   
-        	
+        parent::__construct();             
+        $this->load->model('login/Login_model', 'auth_model');	
     }
-    function hasAllProperties($object, array $properties) {
-    return array_reduce(
-        $properties,
-        function ($acc, $property) use ($object) {
-            return $acc && property_exists($object, $property);
-        },
-        true
-    );
-    }
-
-
-       //logueamos usuarios con codeigniter y angularjs
+    
+     //logueamos usuarios con codeigniter y angularjs
     public function login(){       
         $request = json_decode(file_get_contents("php://input"));
-        // Convert to array
         $requestArr = (array)$request;
-        $empty = empty($requestArr);
-        if (!$empty) {
+        if (!empty($requestArr)) {
             if (array_key_exists("email",$requestArr) && array_key_exists("password",$requestArr)){            
-                $email = $request->email; $password = $request->password;
-                $this->load->model('login/Login_model', 'auth_model');
+                $email = $request->email; $password = $request->password;               
                 $userData = $this->auth_model->login($email, $password);
                 if ($userData !== FALSE) {
                     $temp = array("id_usuario" => $userData->id_usuario, "email" => $userData->email);
@@ -36,7 +22,7 @@ class Auth extends CI_Controller
                     $userInfo = array("nombre" => $userData->nombre, "primerApellido" => $userData->primer_apellido,
                                 "secundoApellido" => $userData->secundo_apellido,"email" => $userData->email,"userAvatar" => $userData->user_avatar);
                     $user->iat = time();
-                    $user->exp = time() + 300;
+                    $user->exp = time() + 60;
                     $jwt = JWT\jwt_helper::encode($user, 'M3g@AL13nH@sH');
                     echo \json_encode(["code" => 0, "X_AUTH_TOKEN" => $jwt, "msg" => "authorized", "userInfo" => $userInfo]);
                 } else {

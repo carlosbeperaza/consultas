@@ -81,6 +81,17 @@ app.factory('consultasService', ['$http',
                     return response.data;
                 });
             }
+            ,
+             getTipoPersona: function () {
+                return $http.get("consultas/consultasCtrl/getTipoPersona").then(function (response) {
+                    return response.data;
+                });
+            },
+            getServicios: function () {
+                return $http.get("consultas/consultasCtrl/getServicios").then(function (response) {
+                    return response.data;
+                });
+            }
 
 //            getProgramas: function () {
 //                return $http.post("dashboard/DashboardCtrl/getProgramas").then(function (response) {

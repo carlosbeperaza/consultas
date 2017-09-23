@@ -31,7 +31,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         .state('login', {
             url: '/login',
             templateUrl: 'usuarios/UsuariosCtrl',
-            resolve: loadSequence('signinCtrl')
+            resolve: loadSequence('signinCtrl', 'sweetalert')
         })
         .state('register', {
             url: '/register',
@@ -61,7 +61,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         .state('app.consulta', {
             url: '/consulta',
             templateUrl: 'consultas/consultasCtrl',
-            resolve: loadSequence('consultasCtrl','consultasService', 'pacientesService')
+            resolve: loadSequence('consultasCtrl','consultasService', 'pacientesService', 'sweetalert', 'usuariosService')
         })
         .state('app.reverso', {
             url: '/reverso',
@@ -108,7 +108,20 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
                          return $q.reject(response);
                     }
                      if(response.data.code === 3){     
-                         alert("Token expired");
+                         swal('Oops...','Token expired!','error');
+                         swal({
+                            title: "¡Token!",
+                            text: "¡Token expired, please sign in to continue!",
+                            type: "warning",
+                            showCancelButton: false,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "SignIn"
+                        }).then(function () {
+                            $auth.removeToken();
+                            $auth.logout();
+                            $location.path('/login');  
+                        });  
+//                         alert("Token expired");
                          $location.path('/login');
                          return $q.reject(response);
                     }
@@ -120,14 +133,17 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
             },
             responseError: function (response) { 
                 if (response.status === 404) {
-                    alert("NOT FOUND ERROR 400!!");
+                    swal('Oops...','¡No Encontrado...!','error');
+//                    alert("NOT FOUND ERROR 400!!");
                 }
                 if (response.status === 500) {
-                    alert("INTERNAL SERVER ERROR 500!!");
+                    swal('Oops...','¡Error del Servidor...!','error');
+//                    alert("INTERNAL SERVER ERROR 500!!");
                 }
                  if (response.status === 401) {
                     $location.path('/login');
-                    alert("UNAUTHORIZED 401!!");
+                    swal('Oops...','¡No Autorizado...!','error');
+//                    alert("¡No Autorizado!");
                 }
                 return $q.reject(response);
             }

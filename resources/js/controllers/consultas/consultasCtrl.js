@@ -1,60 +1,61 @@
-app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService', 'sweetalert',
-    function ($scope, consultasService, pacientesService, sweetalert) {
+app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService', 'sweetalert', '$localStorage', 'usuariosService',
+    function ($scope, consultasService, pacientesService, sweetalert, $localStorage, usuariosService) {
 
         $scope.tipoConsultas = {};
         $scope.paciente = {};
         $scope.disabledNinio = true;
         $scope.disabledReproductiva = true;
         $scope.consulta = {};
-        
-        sweetalert.loadingAlert();
-        
+        $scope.usuario = {};
+
+        sweetalert.loadingAlert('Cargando...', '');
+
         $scope.planTratamientos = [
-            {id:'A', tipo:'A'},
-            {id:'B', tipo:'B'},
-            {id:'C', tipo:'C'}
-        ];        
+            {id: 'A', tipo: 'A'},
+            {id: 'B', tipo: 'B'},
+            {id: 'C', tipo: 'C'}
+        ];
         $scope.noSobres = [
-            {id:'1', cantidad:'3'},
-            {id:'2', cantidad:'5'},
-            {id:'3', cantidad:'10'}
+            {id: '1', cantidad: '3'},
+            {id: '2', cantidad: '5'},
+            {id: '3', cantidad: '10'}
         ];
         $scope.tipoTratamientoIRA = [
-            {id:'1', tipo:'SINTOMÁTICO'},
-            {id:'2', tipo:'ANTIBIÓTICO'}
+            {id: '1', tipo: 'SINTOMÁTICO'},
+            {id: '2', tipo: 'ANTIBIÓTICO'}
         ];
         $scope.trimeGestacional = [
-            {id:'1', tipo:'PRIMERO'},
-            {id:'2', tipo:'SEGUNDO'},
-            {id:'3', tipo:'TERCERO'}
+            {id: '1', tipo: 'PRIMERO'},
+            {id: '2', tipo: 'SEGUNDO'},
+            {id: '3', tipo: 'TERCERO'}
         ];
         $scope.aceptantePuerperio = [
-            {id:'1', tipo:'HORMONAL'},
-            {id:'2', tipo:'DIU'}            
+            {id: '1', tipo: 'HORMONAL'},
+            {id: '2', tipo: 'DIU'}
         ];
         $scope.apliCedulaCancer = [
-            {id:'1', tipo:'PRIMERA VEZ'},
-            {id:'2', tipo:'SEGUNDA VEZ'}            
+            {id: '1', tipo: 'PRIMERA VEZ'},
+            {id: '2', tipo: 'SEGUNDA VEZ'}
         ];
 
         consultasService.getTipoConsulta().then(function (response) {
-            $scope.tipoConsultas = response.data;            
+            $scope.tipoConsultas = response.data;
         });
         consultasService.getFieldsInfoGeneral().then(function (response) {
-            $scope.fieldsInfoGeneral = response.data;         
+            $scope.fieldsInfoGeneral = response.data;
         });
-         consultasService.getDataRelacionTemporal().then(function (response) {
-            $scope.dataRelacionTemporal = response.data;         
+        consultasService.getDataRelacionTemporal().then(function (response) {
+            $scope.dataRelacionTemporal = response.data;
         });
         consultasService.getDataDerechohabiencia().then(function (response) {
-            $scope.dataDerechohabiencia = response.data;           
+            $scope.dataDerechohabiencia = response.data;
         });
         consultasService.getDataDiscapacidad().then(function (response) {
             $scope.dataDiscapacidad = response.data;
         });
         consultasService.getDataClavePersona().then(function (response) {
             $scope.dataClavePersona = response.data;
-        });        
+        });
         consultasService.getProgramas().then(function (response) {
             $scope.dataProgramas = response.data;
         });
@@ -79,10 +80,35 @@ app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService
         consultasService.getComplicaciones().then(function (response) {
             $scope.dataComplicaciones = response.data;
         });
-        consultasService.getOtrasAcciones().then(function (response) {
-            $scope.dataOtrasAcciones = response.data;
+        consultasService.getTipoPersona().then(function (response) {
+            $scope.dataTipoPersona = response.data;
         });
-        
+        consultasService.getServicios().then(function (response) {
+            $scope.dataServicios= response.data;
+        });
+
+        $scope.usuario = {email: $localStorage.userInfo.email};
+        usuariosService.getUserLogonByEmail($scope.usuario).then(function (response) {
+            $scope.dataUserLogonByEmail = response.data;
+            $scope.consulta['curpUser'] = $scope.dataUserLogonByEmail[0].curp;
+            $scope.consulta['cedulaProfecional'] = $scope.dataUserLogonByEmail[0].cedula;
+            $scope.consulta['tipoPersona'] = $scope.dataUserLogonByEmail[0].id_tipo_persona;
+
+            var today = new Date();
+            var dd = ("0" + (today.getDate())).slice(-2);
+            var mm = ("0" + (today.getMonth() + 1)).slice(-2);
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+            
+            $scope.consulta['fecha'] = today;
+            
+            var nombrePrestador = $scope.dataUserLogonByEmail[0].nombre + " " + $scope.dataUserLogonByEmail[0].primer_apellido;
+            $scope.consulta['prestadorServicio'] = nombrePrestador;
+
+
+            sweetalert.close();
+        });
+
         $scope.changeTipoConsulta = function () {
             if ($scope.consulta['tipoConsulta'] === "1") {
                 $scope.disabledNinio = false;
@@ -109,11 +135,11 @@ app.controller('consultasCtrl', ['$scope', 'consultasService', 'pacientesService
             });
         };
 
-        $scope.saveConsulta = function(){
+        $scope.saveConsulta = function () {
             console.log($scope.consulta);
         };
-        
-        $scope.clear = function(){
+
+        $scope.clear = function () {
             $scope.consulta = {};
         };
 
