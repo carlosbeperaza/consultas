@@ -100,6 +100,17 @@ class ConsultasCtrl extends CI_Controller {
     {
         $data['data'] = $this->Consultas_model->getOtrasAcciones();
         echo json_encode($data);
+    }    
+    public function getTipoPersona()
+    {
+        $data['data'] = $this->Consultas_model->getTipoPersona();
+        echo json_encode($data);
+    }
+    
+    public function getServicios()
+    {
+        $data['data'] = $this->Consultas_model->getServicios();
+        echo json_encode($data);
     }
           
 

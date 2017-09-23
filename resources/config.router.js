@@ -61,7 +61,7 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         .state('app.consulta', {
             url: '/consulta',
             templateUrl: 'consultas/consultasCtrl',
-            resolve: loadSequence('consultasCtrl','consultasService', 'pacientesService')
+            resolve: loadSequence('consultasCtrl','consultasService', 'pacientesService', 'sweetalert', 'usuariosService')
         })
         .state('app.reverso', {
             url: '/reverso',

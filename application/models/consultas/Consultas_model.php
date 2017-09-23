@@ -17,6 +17,8 @@ class Consultas_model extends CI_Model {
   private $GET_RESULTADO_BATTELLE = "select * from rest_battelle";
   private $GET_COMPLICACIONES = "select * from complicaciones";
   private $GET_OTRAS_ACCIONES = "select * from embarazo_acciones";
+  private $GET_TIPO_PERSONA = "select * from tipo_personal";
+  private $GET_SERVICIOS = "select * from servicios";
   
   //aqui es donde se hace uso de la base datos "urgencias"
   public  function __construct()
@@ -115,6 +117,17 @@ class Consultas_model extends CI_Model {
   public function getOtrasAcciones()
   {
     $query = $this->db->query($this->GET_OTRAS_ACCIONES);
+    return $query->result(); 
+  }
+  public function getTipoPersona()
+  {
+    $query = $this->db->query($this->GET_TIPO_PERSONA);
+    return $query->result(); 
+  }
+  
+  public function getServicios()
+  {
+    $query = $this->db->query($this->GET_SERVICIOS);
     return $query->result(); 
   }
 

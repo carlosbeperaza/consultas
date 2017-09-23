@@ -25,12 +25,70 @@
                             </div>
                             <div class="card-block"> 
                                 <div class="row">
-                                    <div class="col-lg-3" ng-repeat="field in fieldsInfoGeneral">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label>{{field.title}}</label>
-                                            <input ng-model="consulta[field.model]" type="{{field.type_field}}" placeholder="{{field.title}}" class="form-control form-control-sm">
+                                            <label>CLUES</label>
+                                            <input type="text" placeholder="CLUES"  ng-model="consulta['clues']" class="form-control form-control-sm">
                                         </div>
-                                    </div>                                    
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>NOMBRE UNIDAD</label>
+                                            <input type="text" placeholder="NOMBRE UNIDAD" ng-model="consulta['nombreUnidad']" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>CURP</label>
+                                            <input type="text" placeholder="CURP" ng-disabled="consulta['curpUser'] != null"  ng-model="consulta['curpUser']" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>PRESTADOR DE S.</label>
+                                            <input type="text" placeholder="PRESTADOR DE SERVICIOS" ng-disabled="consulta['prestadorServicio'] != null"  ng-model="consulta['prestadorServicio']" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>TIPO DE PERSONA</label>                                            
+                                            <div class="select">
+                                                <select ng-model="consulta['tipoPersona']" ng-disabled="consulta['tipoPersona'] != null" class="form-control form-control-sm"                                                
+                                                        ng-options="tpersona.id_personal as tpersona.tipo_personal for tpersona in dataTipoPersona">
+                                                    <option selected disabled hidden></option>
+                                                </select>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>CÉDULA PROFECIONAL</label>
+                                            <input type="text" placeholder="CÉDULA PROFECIONAL" ng-disabled="consulta['cedulaProfecional'] != null" ng-model="consulta['cedulaProfecional']" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>SERVICIO</label>                                            
+                                            <div class="select">
+                                                <select ng-model="consulta['servicio']" class="form-control form-control-sm"                                                
+                                                        ng-options="servicio.id_servicio as servicio.tipo_servicio for servicio in dataServicios">
+                                                    <option selected disabled hidden></option>
+                                                </select>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>FECHA</label>
+                                            <input type="date" class="form-control form-control-sm"  ng-model="consulta['fecha']">
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="col-lg-3" ng-repeat="field in fieldsInfoGeneral">
+                                                                            <div class="form-group">
+                                                                                <label>{{field.title}}</label>
+                                                                                <input ng-model="consulta[field.model]" type="{{field.type_field}}" placeholder="{{field.title}}" class="form-control form-control-sm">
+                                                                            </div>
+                                                                        </div>                                    -->
                                 </div>                        
                             </div>
                         </div>
