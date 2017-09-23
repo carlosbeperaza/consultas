@@ -1442,10 +1442,14 @@ section.forms .input-group-btn .dropdown-menu a {
   margin-bottom: 0;
 }
 
-.login-page form,
-.register-page form {
+.login-page form{
   margin: 0 auto 10px;
   max-width: 300px;
+}
+
+.register-page form {
+  margin: 0 auto 10px;
+  /*max-width: 300px;*/
 }
 
 .login-page form .form-group,
