@@ -111,16 +111,14 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
                     }
                     if(response.headers('code') === "3"){ 
                         $location.path('/login');
-                        swal("¡Token expirado!","Inicia sesión para renovar tu token.","warning");
+                        swal("¡Token expirado!","Inicie sesión para renovar su token.","warning");
                         return $q.reject(response);
                     }
                     if(response.headers('code') === "4"){ 
                         $location.path('/login');
-                        swal("¡Falta el token!","Inicia sesión para obtener un token.","warning");
+                        swal("¡Falta el token!","Inicie sesión para obtener un token.","warning");
                         return $q.reject(response);
                     }
-                    
-                   
                     
                 }
                 return response || $q.when(response);

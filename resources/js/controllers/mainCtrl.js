@@ -8,7 +8,7 @@ app.controller('AppCtrl', ['$rootScope', '$scope', '$state', '$location', '$auth
         $scope.logout = function (event) {
             swal({
                 title: "¡Cerrar Sesión!",
-                text: "¿Estas seguro que deseas cerrar tu sesión?",
+                text: "¿Esta seguro que desea cerrar su sesión?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -57,7 +57,7 @@ app.run(function ($rootScope, $location,$auth) {
                 $auth.removeToken();
                 $auth.logout();
                 ev.preventDefault();
-                swal("¡No Autorizado!","Porfavor Inicia sesión para obtener un token.","warning");            
+                swal("¡No Autorizado!","Porfavor Inicie sesión para obtener un token.","warning");            
             }
         }
       

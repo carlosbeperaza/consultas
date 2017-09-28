@@ -29,7 +29,7 @@ class jwt_helper
         $response=[];
         $CI =& get_instance();
         $CI->load->model('login/Login_model','auth_model');
-        if(!isset($headers["X_AUTH_TOKEN"]) || empty($headers["X_AUTH_TOKEN"])){
+        if(!isset($headers["X_AUTH_TOKEN"]) || empty($headers["X_AUTH_TOKEN"]) || $headers["X_AUTH_TOKEN"]==null){
             //mejorar la validación, pero si está aquí es que no tenemos el token
             $response = array("code" => 4,"X_AUTH_TOKEN" => $headers["X_AUTH_TOKEN"], "msg" =>"Token Unavailable");            
         }else{
