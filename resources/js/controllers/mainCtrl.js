@@ -50,11 +50,17 @@ app.run(function ($rootScope, $location,$auth) {
     };
 
     $rootScope.$on('$stateChangeStart', function (ev, to, toParams, from, fromParams) {
-      // if route requires auth and user is not logged in
-      if (!routeClean($location.url()) && ! $auth.isAuthenticated()) {
-        // redirect back to login
-        $location.path('/login');
-      }
+
+        var authenticated = $auth.isAuthenticated();        
+        if(from.name === "login" && to.name !== "login"){
+            if (authenticated === false) {
+                $auth.removeToken();
+                $auth.logout();
+                ev.preventDefault();
+                swal("¡No Autorizado!","Porfavor Inicia sesión para obtener un token.","warning");            
+            }
+        }
+      
     });
     
         

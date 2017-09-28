@@ -5,11 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class UsuariosCtrl extends CI_Controller {
 
     public function __construct() {
-
         parent::__construct();
-//        $this->load->database(); 
-        $this->load->model("usuarios/Usuarios_model"); 
-        	
+        $this->load->model("usuarios/Usuarios_model");         	
     }
 
     public function index() {

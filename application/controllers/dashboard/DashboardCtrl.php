@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	
 
-class DashboardCtrl extends CI_Controller {
+class DashboardCtrl extends MY_Controller {
 
 	public function __construct()
 	{
@@ -16,8 +16,6 @@ class DashboardCtrl extends CI_Controller {
             die();
         }
 		parent::__construct();
-		//Do your magic here
-            $this->headers = apache_request_headers();
             $this->load->model('dashboard/Dashboard_model','dashboardModel');
 	}
 
@@ -28,17 +26,8 @@ class DashboardCtrl extends CI_Controller {
 
 	public function getProgramas()
 	{
-          $response = JWT\jwt_helper::VerifyToken($this->headers);
-          $data=array();
-          if($response["code"]==0){
-              //code 0 significa que el usuario exsite y esta bien su token.
-              //aqui realizar todo los trabajos.
-              $data = $this->dashboardModel->getProgramas();  
-          }
-          echo \json_encode(array("code" => $response["code"],"X_AUTH_TOKEN" => $response["X_AUTH_TOKEN"],"msg" => $response["msg"], "programas"=>$data));
-	}
+        $data = $this->dashboardModel->getProgramas();
+        echo \json_encode($data);
+      }
 
 }
-
-/* End of file DashboardCrtl.php */
-/* Location: ./application/controllers/dashboard/DashboardCrtl.php */

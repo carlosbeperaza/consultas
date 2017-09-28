@@ -14,7 +14,6 @@ class ConsultasCtrl extends CI_Controller {
             die();
         }
         parent::__construct();
-        //Do your magic here	
         $this->load->model("consultas/Consultas_model");       
     }
 

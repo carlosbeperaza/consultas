@@ -97,33 +97,27 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
                 return httpConfig;                                
             },
             response: function (response) {
-                if (!response.config.cache) {                  
-                    if(response.data.code === 0){
-                         var newToken = response.data.X_AUTH_TOKEN;
-//                    var oldToken = app.token;
+                if (!response.config.cache) { 
+                    var msg = response.headers('msg');
+                    var code = response.headers('code');
+                    var newToken = response.headers('X_AUTH_TOKEN');
+                    if(response.headers('code') === "0"){
+                        var newToken = response.headers('X_AUTH_TOKEN');
                         localStorage.setItem(tokenName, newToken);
                         app.token = localStorage.getItem(tokenName);
                     }
-                    if(response.data.code === 1){
+                    if(response.headers('code') === "1"){
                          return $q.reject(response);
                     }
-                     if(response.data.code === 3){     
-                         swal('Oops...','Token expired!','error');
-                         swal({
-                            title: "¡Token!",
-                            text: "¡Token expired, please sign in to continue!",
-                            type: "warning",
-                            showCancelButton: false,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "SignIn"
-                        }).then(function () {
-                            $auth.removeToken();
-                            $auth.logout();
-                            $location.path('/login');  
-                        });  
-//                         alert("Token expired");
-                         $location.path('/login');
-                         return $q.reject(response);
+                    if(response.headers('code') === "3"){ 
+                        $location.path('/login');
+                        swal("¡Token expirado!","Inicia sesión para renovar tu token.","warning");
+                        return $q.reject(response);
+                    }
+                    if(response.headers('code') === "4"){ 
+                        $location.path('/login');
+                        swal("¡Falta el token!","Inicia sesión para obtener un token.","warning");
+                        return $q.reject(response);
                     }
                     
                    
@@ -134,16 +128,12 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
             responseError: function (response) { 
                 if (response.status === 404) {
                     swal('Oops...','¡No Encontrado...!','error');
-//                    alert("NOT FOUND ERROR 400!!");
                 }
                 if (response.status === 500) {
                     swal('Oops...','¡Error del Servidor...!','error');
-//                    alert("INTERNAL SERVER ERROR 500!!");
                 }
                  if (response.status === 401) {
-                    $location.path('/login');
                     swal('Oops...','¡No Autorizado...!','error');
-//                    alert("¡No Autorizado!");
                 }
                 return $q.reject(response);
             }

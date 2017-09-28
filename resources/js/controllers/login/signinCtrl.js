@@ -11,15 +11,14 @@ app.controller('signinCtrl', ["$scope","$rootScope",'$state','$auth','$localStor
                 email: $scope.user.email,
                 password: $scope.user.password
             }).then(function (response) {
-                $localStorage.userInfo=response.data.userInfo;
-                $rootScope.userInfo=response.data.userInfo;
-                $auth.setToken(response.data.X_AUTH_TOKEN);
+                $localStorage.userInfo=response.data;
+                $rootScope.userInfo=response.data;
+                $auth.setToken(response.headers('X_AUTH_TOKEN'));
                 $state.go('app.dashboard');  
             }).catch(function (response) {
                 if (response.data.status !== 'INTERNAL_SERVER_ERROR') {                 
                     $scope.authError = 'Usuario o contrasena no validos';
                     sweetalert.warning2("¡Usuario y/o contraseña no valido!","¡por favor verifique su usuario y/o contraseña !");
-//                    alert('Usuario o contrasena no validos');
                 } else {                    
                     $scope.authError = 'Server Error';
                     $scope.loading = false;
