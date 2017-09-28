@@ -40,7 +40,7 @@ class jwt_helper
             }else{                
                 if($CI->auth_model->checkUser($user->id_usuario, $user->email) !== false){
                     $user->iat = time();
-                    $user->exp = time() + 30;
+                    $user->exp = time() + 300;
                     $jwt = static::encode($user,'M3g@AL13nH@sH');
                     $response = array("code" => 0,"X_AUTH_TOKEN" => $jwt, "msg" =>"authorized");
 

@@ -20,7 +20,9 @@ class Auth extends CI_Controller
                     $temp = array("id_usuario" => $userData->id_usuario, "email" => $userData->email);
                     $user = (object) $temp;
                     $userInfo = array("nombre" => $userData->nombre, "primerApellido" => $userData->primer_apellido,"secundoApellido" => $userData->secundo_apellido,"email" => $userData->email,"userAvatar" => $userData->user_avatar);
-                    $user->iat = time(); $user->exp = time() + 120;  $jwt = JWT\jwt_helper::encode($user, 'M3g@AL13nH@sH');
+                    $user->iat = time(); 
+                    $user->exp = time() + 300;  
+                    $jwt = JWT\jwt_helper::encode($user, 'M3g@AL13nH@sH');
                     $msg = 'msg:AUTHORIZED'; $code = 'code:0'; $X_AUTH_TOKEN = 'X_AUTH_TOKEN:'.$jwt;
                     header($msg,''); header($code, '');  header($X_AUTH_TOKEN, '');
                     echo \json_encode($userInfo);
