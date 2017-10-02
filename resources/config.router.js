@@ -3,15 +3,15 @@
 /**
  * Configuración de las rutas
  */
-app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazyLoadProvider','JS_REQUIRES', '$authProvider','$provide', '$httpProvider',
-	function($stateProvider , $urlRouterProvider,  $controllerProvider,  $ocLazyLoadProvider,  jsRequires,$authProvider,  $provide,   $httpProvider){
+app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$compileProvider','$ocLazyLoadProvider','JS_REQUIRES', '$authProvider','$provide', '$httpProvider',
+	function($stateProvider , $urlRouterProvider,  $controllerProvider,  $compileProvider, $ocLazyLoadProvider,  jsRequires,$authProvider,  $provide,   $httpProvider){
 
-    //Setellizer-Token Parameters Configuration  
+   
     //Previo a abrir la página, obtengo del local storage el token existente
     app.token = localStorage.getItem($authProvider.tokenName);      
 
     app.controller = $controllerProvider.register;
-    // app.directive = $compileProvider.directive;
+    app.directive = $compileProvider.directive;
     app.factory = $provide.factory;
     app.service = $provide.service;
     app.constant = $provide.constant;
@@ -35,7 +35,8 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
         })
         .state('register', {
             url: '/register',
-            templateUrl: 'usuarios/UsuariosCtrl/register'
+            templateUrl: 'usuarios/UsuariosCtrl/register',
+            resolve: loadSequence('signupCtrl', 'sweetalert')
         })        
         .state('app', {
             url: '/app',
@@ -77,12 +78,13 @@ app.config(['$stateProvider','$urlRouterProvider','$controllerProvider','$ocLazy
     $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache',
     
     $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+        //Setellizer-Token Parameters Configuration  
         var protocol = $location.protocol();
         var host = $location.host();
         var port = $location.port();
         var APIURL = protocol+"://" + host +":" + port;
         $authProvider.loginUrl = APIURL +"/consultas/auth/auth/login";
-        $authProvider.signupUrl = APIURL + "/consultas/auth/auth/logoutUser";
+        $authProvider.signupUrl = APIURL + "/consultas/auth/auth/signup";
         $authProvider.tokenName = "X_AUTH_TOKEN";
         $authProvider.tokenPrefix = "";
         var config = $authProvider.SatellizerConfig;

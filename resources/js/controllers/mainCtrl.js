@@ -52,7 +52,7 @@ app.run(function ($rootScope, $location,$auth) {
     $rootScope.$on('$stateChangeStart', function (ev, to, toParams, from, fromParams) {
 
         var authenticated = $auth.isAuthenticated();        
-        if(from.name === "login" && to.name !== "login"){
+        if(from.name === "login" && to.name !== "login" &&  to.name !== "register"){
             if (authenticated === false) {
                 $auth.removeToken();
                 $auth.logout();

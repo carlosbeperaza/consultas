@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bootstrap Dashboard by Bootstrapious.com</title>
+    <title>consultasExternas</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -29,7 +29,10 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <!--<script  src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>-->
+    <script src="<?php base_url()?>resources/js/jquery_1_11_0.min.js"></script>
+    <script src="<?php base_url()?>resources/js/jquery-ui_1_11_0.min.js"></script>
     <script src="<?php base_url()?>resources/js/angular.js"></script>
     <script src="<?php base_url()?>resources/js/angular-ui-router.min.js"></script>
     <script src="<?php base_url()?>resources/js/components/angular-messages/angular-messages.js"></script>
@@ -43,14 +46,11 @@
     <script src="<?php base_url()?>resources/config.router.js"></script>    
     <script src="<?php base_url()?>resources/js/controllers/mainCtrl.js"></script>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>
-    
-<!--    SWEETALAERT
+    <!--SWEETALAERT-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.css"/>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.js"></script>-->
+    <link rel="stylesheet" href="<?php base_url()?>resources/js/components/sweetalert/sweetalert.css"></link>
     <script src="<?php base_url()?>resources/js/components/sweetalert/sweetalert.js"></script>
-    <script src="<?php base_url()?>resources/js/components/sweetalert/sweetalert.css"></script>-->
-    <!--CSSPING-->
-    <!--<script src="<?php base_url()?>resources/js/components/csspin/csspin.css"></script>-->
     
 </head>
 

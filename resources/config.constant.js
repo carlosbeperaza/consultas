@@ -15,6 +15,9 @@ app.constant('JS_REQUIRES', {
 
         'signinCtrl': 'resources/js/controllers/login/signinCtrl.js',
         'signinService': 'resources/js/services/login/signinService.js',
+        
+        'signupCtrl': 'resources/js/controllers/signup/signupCtrl.js',
+        'signupService': 'resources/js/services/signup/signupService.js',
 
         'dashboardCtrl': 'resources/js/controllers/dashboard/dashboardCtrl.js',
         'dashboardService': 'resources/js/services/dashboard/dashboardService.js',

@@ -1,26 +1,249 @@
-<div class="page register-page">
+<style>
+    #Rform{
+        position: relative;
+        z-index: 0;
+        
+    }
+    #Rform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
+	padding: 0px 20px 0px 20px;
+	box-sizing: border-box;
+	width: 90%;
+	margin: 5% 5% 5% 5%;	
+	/*stacking fieldsets above each other*/
+	position: relative;
+    }
+    /*Hide all except first fieldset*/
+    #Rform fieldset:not(:first-of-type) {
+        display: none;
+    }
+    /*inputs*/
+    #Rform input{
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            color: #2C3E50;
+            font-size: 13px;
+            text-align: left;
+    }
+
+    #Rform input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: lightgray;
+    }
+    #Rform input::-moz-placeholder { /* Firefox 19+ */
+         color: lightgray;
+    }
+    #Rform input:-ms-input-placeholder { /* IE 10+ */
+        color: lightgray;
+    }
+    #Rform input:-moz-placeholder { /* Firefox 18- */
+         color: lightgray;
+    }
+    
+    #Rform .action-button {
+	width: 100px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 2px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+        text-align: center;
+    }
+    #Rform .action-button:hover, #Rform.action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+    }
+    #progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+    }
+    #progressbar li {
+	list-style-type: none;
+	color: #2b90d9;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #2b90d9;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+    }
+    #progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+    }
+    /*marking active/completed steps green*/
+    /*The number of the step and the connector before it = green*/
+    #progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: white;
+    }
+
+    .msg-block {
+        margin-top:0px;
+    }
+    .msg-error {
+        color:#F00;
+        font-size:12px;
+    }
+</style>
+<script>
+   //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
+
+    $(".next").click(function(){
+	if(animating) return false;
+	animating = true;
+	
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
+	
+	//activate next step on progressbar using the index of next_fs
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+	
+	//show the next fieldset
+	next_fs.show(); 
+	//hide the current fieldset with style   
+	current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    //2. bring next_fs from the right(50%)
+                    left = (now * 50)+"%";
+                    //3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({
+                        'transform': 'scale('+scale+')'
+                      });
+             next_fs.css({'left': left, 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		},
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+    });
+
+    $(".previous").click(function(){
+	if(animating) return false;
+	animating = true;	
+	current_fs = $(this).parent();
+	previous_fs = $(this).parent().prev();	
+	//de-activate current step on progressbar
+	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");	
+	//show the previous fieldset
+	previous_fs.show(); 
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		},
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+    });
+
+    $(".submit").click(function(){
+            return false;
+    }); 
+</script>
+<div class="page register-page"  ng-controller="signupCtrl">
     <div class="container">
         <div class="form-outer text-center d-flex align-items-center">
-            <div class="form-inner" style="border:solid blue;">
-                <div class="logo text-uppercase"><span>Dash</span><strong class="text-primary">Express</strong></div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-                <form id="register-form" style="border:solid red;">
-                    <div class="form-group">                       
-                        <input placeholder="First Name" id="register-username" type="text" name="registerUsername" required>
-                         <input placeholder="Second Name" id="register-secondname" type="text" name="registerUsername" required>
-                    </div>
-                    <div class="form-group">                        
-                        <input placeholder="Email Address" id="register-email" type="email" name="registerEmail" required>
-                    </div>
-                    <div class="form-group">                       
-                        <input placeholder="password" id="register-passowrd" type="password" name="registerPassword" required>
-                    </div>
-                    <div class="terms-conditions d-flex justify-content-center">
-                        <input id="license" type="checkbox" class="form-control-custom">
-                        <label for="license">Agree the terms and policy</label>
-                    </div>
-                    <input id="register" type="submit" value="Register" class="btn btn-primary">
-                </form><small>Already have an account? </small><a ui-sref="login" class="signup">Login</a>
+            <div class="form-inner">
+                <div class="logo text-uppercase"><span>consults</span><strong class="text-primary">Externas</strong></div>
+                <p>Formulario de Regisro de Usuario. </p>
+                <form id="Rform">  
+                      <ul id="progressbar">
+                        <li class="active">Account Setup</li>
+                        <li>Social Profiles</li>
+                        <li>Personal Details</li>
+                      </ul>
+                    <fieldset>                    
+                        <input placeholder="Correo" id="email" type="email" name="email" ng-model='user.email' ng-required="true">
+                        <input placeholder="Contraseña" type="password" id='pw1' name='pw1'  ng-model='pw1' required ng-required="true">
+                        <input placeholder="Comprobar Contraseña"  type="password" id='pw2' name='pw2'  ng-model='pw2' required ng-required pw-check='pw1'>
+                        <div class='msg-block' ng-show='Rform.$error'>
+                            <span class='msg-error' ng-show='Rform.pw2.$error.pwmatch'>
+                              Passwords don't match.
+                            </span>
+                        </div>
+                        <input type="button" name="next" class="next action-button" value="Next" />     
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" name="twitter" placeholder="Twitter" />
+                        <input type="text" name="facebook" placeholder="Facebook" />
+                        <input type="text" name="gplus" placeholder="Google Plus" />
+                        <input type="button" name="previous" class="previous action-button" value="Previous" />
+                        <input type="button" name="next" class="next action-button" value="Next" />
+                    </fieldset>
+                    <fieldset>
+                        <input type="text" name="fname" placeholder="First Name" />
+                        <input type="text" name="lname" placeholder="Last Name" />
+                        <input type="text" name="phone" placeholder="Phone" />
+                        <div class="terms-conditions d-flex justify-content-center">
+                            <input id="license" type="checkbox" class="form-control-custom">
+                            <label for="license">Agree the terms and policy</label>
+                        </div>
+                        <input type="button" name="previous" class="previous action-button" value="Previous" />
+                        <input type="submit" name="submit" class="submit action-button" value="Register" />
+                        
+                    </fieldset>
+                    
+                   
+                    <!--<input id="register" type="submit" value="Register" class="btn btn-primary">-->
+                </form>
+                <small>Already have an account? </small><a ui-sref="login" class="signup">Login</a>
             </div>
             <div class="copyrights text-center">
                 <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
