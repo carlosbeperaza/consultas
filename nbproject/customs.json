@@ -1,6 +1,12 @@
 {
     "elements": {},
     "attributes": {
+        "submitform": {
+            "context": "input"
+        },
+        "registerform": {
+            "context": "form"
+        },
         "ui-sref": {
             "context": "a"
         }
